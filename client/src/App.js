@@ -7,14 +7,18 @@ import store from './store';
 
 import AppNavbar from './components/AppNavbar';
 import ToDoList from './components/ToDoList';
+import ItemModal from './components/ItemModal';
+import { Container } from 'reactstrap';
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-      <div className="App">
-        <AppNavbar />
-        <ToDoList />
-      </div>
+        <div className="App">
+          <AppNavbar />
+          <Container><ItemModal /></Container>
+          <ToDoList />
+        </div>
       </Provider>
     );
   }
