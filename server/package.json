@@ -1,12 +1,15 @@
 {
-  "name": "crud-op-mongo",
+  "name": "to_do_list",
   "version": "1.0.0",
-  "description": "This will perform CRUD operation on MongoDB.",
+  "description": "To-Do application will helps you to manage you tasks on the go.",
   "main": "server.js",
   "scripts": {
+    "client-install": "cd .. && cd client && npm install",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "client": "cd .. && cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd .. && cd client && npm install && cd .. && cd client && npm run build"
   },
   "author": "Santhosh Venkatesan",
   "license": "MIT",
