@@ -11,8 +11,8 @@ class ToDoList extends Component {
         this.props.getItems();
     }
 
-    onDeleteClick = (id) => {
-        this.props.deleteItem(id);
+    onDeleteClick = (_id) => {
+        this.props.deleteItem(_id); // this id is different and it could be anything.
     }
 
     render() {
@@ -21,14 +21,14 @@ class ToDoList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="todo-list">
-                        {items.map(({ id, name, description }) => (
-                            <CSSTransition key={id} timeout={500} classNames="fade">
+                        {items.map(({ _id, name, description }) => (
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Button
                                         className="remove-btn"
                                         color="danger"
                                         size="sm"
-                                        onClick={this.onDeleteClick.bind(this, id)}>
+                                        onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;</Button>
                                     {name}</ListGroupItem>
                             </CSSTransition>
