@@ -15,7 +15,8 @@ import { addItem } from '../actions/itemActions';
 class ItemModal extends Component {
     state = {
         modal: false,
-        name: ''
+        name: '',
+        description: ''
     }
 
     toggle = () => {
@@ -33,7 +34,7 @@ class ItemModal extends Component {
 
         const newItem = {
             name: this.state.name,
-            description: "Testing"
+            description: this.state.description
         };
 
         // Add item via addItem action
@@ -51,7 +52,6 @@ class ItemModal extends Component {
                     style={{ marginBottom: '2rem' }}
                     onClick={this.toggle}
                 >Add Item</Button>
-
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}>
@@ -67,11 +67,18 @@ class ItemModal extends Component {
                                     placeholder="Add To-Do Item"
                                     onChange={this.onChange}
                                 />
+                                <Label for="description" style={{ marginTop: '1rem' }}>Description</Label>
+                                <Input
+                                    type="textarea"
+                                    name="description"
+                                    id="description"
+                                    placeholder="Write something about your to-do list..."
+                                    onChange={this.onChange}
+                                />
                                 <Button
-                                    color="dark"
-                                    style={{ marginTop: '2rem' }}
-                                    block
-                                    on
+                                    color="success"
+                                    className="float-right"
+                                    style={{ marginTop: '1rem' }}
                                 >Add Item</Button>
                             </FormGroup>
                         </Form>

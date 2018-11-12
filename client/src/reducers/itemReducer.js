@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
     items: [],
@@ -13,21 +13,26 @@ export default function (state = initialState, action) {
                 items: action.payload, // updating initialState with action.payload
                 loading: false // Disablling loading spinner once we get all the data.
             };
-        case DELETE_ITEM:
-            return {
-                ...state,
-                items: state.items.filter(item => item._id !== action.payload)
-            }
         case ADD_ITEM:
             return {
                 ...state,
                 items: [action.payload, ...state.items]
-            }
+            };
+        case UPDATE_ITEM: // need to work out
+            return {
+                ...state,
+                items: [action.payload, ...state.items]
+            };
+        case DELETE_ITEM:
+            return {
+                ...state,
+                items: state.items.filter(item => item._id !== action.payload)
+            };
         case ITEMS_LOADING:
             return {
                 ...state,
                 loading: true // This will display loading spinner while all the data is loading.
-            }
+            };
         default:
             return state;
     }

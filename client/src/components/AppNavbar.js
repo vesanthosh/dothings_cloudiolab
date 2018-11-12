@@ -14,7 +14,7 @@ class AppNavbar extends Component {
     state = {
         isOpen: false
     }
-    
+
     toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
@@ -24,14 +24,14 @@ class AppNavbar extends Component {
     render() {
         return (
             <div>
-                <Navbar color = "dark" dark expand = "sm" className = "mb-5">
+                <Navbar color="dark" dark expand="sm" className="mb-4">
                     <Container>
-                        <NavbarBrand href = "/">To-Do List</NavbarBrand>
-                        <NavbarToggler onClick = {this.toggle}/>
-                        <Collapse isOpen = {this.state.isOpen} navbar>
-                            <Nav className = "ml-auto" navbar>
+                        <NavbarBrand href="/">To-Do List</NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href = "https://www.google.com">Search Online</NavLink>
+                                    <NavLink href="https://www.google.com">Search Online</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
