@@ -30,7 +30,7 @@ class ToDoList extends Component {
                                         size="sm"
                                         onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;</Button>
-                                    {name}</ListGroupItem>
+                                    {name} | {description}</ListGroupItem>
                             </CSSTransition>
                         ))}
                     </TransitionGroup>
