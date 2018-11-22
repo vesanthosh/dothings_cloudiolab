@@ -29,7 +29,7 @@ class ToDoList extends Component {
                                         color="danger"
                                         size="sm"
                                         onClick={this.onDeleteClick.bind(this, _id)}>
-                                        &times;</Button>
+                                        &#10008;</Button>
                                     {name} | {description}</ListGroupItem>
                             </CSSTransition>
                         ))}
