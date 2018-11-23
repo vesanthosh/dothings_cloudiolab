@@ -7,7 +7,7 @@ import store from './store';
 
 import AppNavbar from './components/AppNavbar';
 import ToDoList from './components/ToDoList';
-import ItemModal from './components/ItemModal';
+import AddItemModal from './components/AddItemModal';
 import { Container } from 'reactstrap';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavbar />
-          <Container><ItemModal /></Container>
+          <Container><AddItemModal /></Container>
           <ToDoList />
         </div>
       </Provider>

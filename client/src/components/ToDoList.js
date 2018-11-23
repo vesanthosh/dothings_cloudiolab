@@ -35,7 +35,6 @@ class ToDoList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-
             </Container>
         );
     }
