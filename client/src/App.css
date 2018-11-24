@@ -1,5 +1,11 @@
 .remove-btn {
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.todo-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .group-content {
