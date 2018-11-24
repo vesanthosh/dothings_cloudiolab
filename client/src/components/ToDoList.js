@@ -28,11 +28,11 @@ class ToDoList extends Component {
                                     {name} | {description}
                                     <div className="group-content">
                                         <UpdateItemModal _id={_id} name={name} description={description} />
-                                    <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}>
+                                        <Button
+                                            className="remove-btn"
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}>
                                             &#10008;</Button></div>
                                 </ListGroupItem>
                             </CSSTransition>
