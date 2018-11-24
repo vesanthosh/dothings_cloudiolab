@@ -48,26 +48,26 @@ class ItemModal extends Component {
         return (
             <div>
                 <Button
-                    color='dark'
+                    color='success'
                     style={{ marginBottom: '1rem' }}
                     onClick={this.toggle}
-                >Add Item</Button>
+                >&#10010; Add List</Button>
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Add to To-Do List</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Add To-Do List</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">Item</Label>
+                                <Label for="item" className="addItemModalLabel">Todo Name</Label>
                                 <Input
                                     type="text"
                                     name="name"
                                     id="item"
-                                    placeholder="Add To-Do Item"
+                                    placeholder="Name the to-do list"
                                     onChange={this.onChange}
                                 />
-                                <Label for="description" style={{ marginTop: '1rem' }}>Description</Label>
+                                <Label for="description" className="addItemModalLabel" style={{ marginTop: '1rem' }}>Description</Label>
                                 <Input
                                     type="textarea"
                                     name="description"
@@ -79,7 +79,7 @@ class ItemModal extends Component {
                                     color="success"
                                     className="float-right"
                                     style={{ marginTop: '1rem' }}
-                                >Add Item</Button>
+                                >Add List</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
