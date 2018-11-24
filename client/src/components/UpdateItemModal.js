@@ -52,20 +52,20 @@ class UpdateItemModal extends Component {
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Edit To-Do Item</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Edit To-Do List</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">Item</Label>
+                                <Label for="item" className="addItemModalLabel">Todo Name</Label>
                                 <Input
                                     type="text"
                                     name="name"
                                     id="item"
                                     value={this.state.name}
-                                    placeholder="Edit To-Do Item"
+                                    placeholder="Name the to-do list"
                                     onChange={this.onChange}
                                 />
-                                <Label for="description" style={{ marginTop: '1rem' }}>Description</Label>
+                                <Label for="description" className="addItemModalLabel" style={{ marginTop: '1rem' }}>Description</Label>
                                 <Input
                                     type="textarea"
                                     name="description"
@@ -78,7 +78,7 @@ class UpdateItemModal extends Component {
                                     color="warning"
                                     className="float-right"
                                     style={{ marginTop: '1rem' }}
-                                >Update Item</Button>
+                                >Update List</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
