@@ -18,6 +18,14 @@ export const addItem = (item) => dispatch => {
         }));
 };
 
+export const updateItem = (item) => dispatch => {
+    axios.put(`/api/items/${item._id}`, item)
+        .then(res => dispatch({
+            type: UPDATE_ITEM,
+            payload: res.data
+        }));
+};
+
 export const deleteItem = (_id) => dispatch => { // This _id could be anything.
     axios.delete(`/api/items/${_id}`)
         .then(res => dispatch({
