@@ -2,9 +2,10 @@
     margin-right: 0.5rem;
 }
 
-/* .update-btn {
-    margin-right: 0.5rem;
-} */
+.group-content {
+    display: flex;
+    flex-direction: row;
+}
 
 .fade-enter {
     opacity: 0.01;
