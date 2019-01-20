@@ -15,24 +15,6 @@ const ProfileSchema = new Schema({
     location: {
         type: String
     },
-    todoItems: [
-        {
-            name: {
-                type: String,
-                required: true,
-                min: 2,
-                max: 60
-            },
-            description: {
-                type: String,
-                max: 200
-            },
-            date: {
-                type: Date,
-                default: Date.now
-            }
-        }
-    ],
     social: {
         youtube: {
             type: String
@@ -58,4 +40,4 @@ const ProfileSchema = new Schema({
         timestamps: true
     });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Profile = mongoose.model('profiles', ProfileSchema);

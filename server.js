@@ -5,8 +5,9 @@ const path = require('path');
 const passport = require('passport');
 
 // Supplying API routes
-const users = require('./routes/api/users');
+const user = require('./routes/api/user');
 const profile = require("./routes/api/profile");
+const todoItem = require("./routes/api/todoItem");
 
 const app = express();
 
@@ -30,8 +31,9 @@ app.use(passport.initialize());
 require('./config/passport')(passport); // Passing "passport" and it has many authentication strategy such as local, google and jwt like that.
 
 // User Routes
-app.use('/api/users', users);
+app.use('/api/user', user);
 app.use("/api/profile", profile);
+app.use("/api/todoItem", todoItem);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
