@@ -5,6 +5,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
     constructor(props) {
@@ -24,9 +25,23 @@ class CreateProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
+    }
+
     onSubmit(e) {
         e.preventDefault();
-        console.log('submit');
+        const profileData = {
+            handle: this.state.handle,
+            location: this.state.location,
+            twitter: this.state.twitter,
+            facebook: this.state.facebook,
+            linkedin: this.state.linkedin,
+            instagram: this.state.instagram
+        };
+        this.props.createProfile(profileData, this.props.history);
     }
 
     onChange(e) {
@@ -34,7 +49,54 @@ class CreateProfile extends Component {
     }
 
     render() {
-        const { errors } = this.state;
+        const { errors, displaySocialInputs } = this.state;
+
+        let socialInputs;
+        if (displaySocialInputs) {
+            socialInputs = (
+                <div>
+                    <InputGroup
+                        placeholder="Twitter Profile URL"
+                        name="twitter"
+                        icon="fab fa-twitter"
+                        value={this.state.twitter}
+                        onChange={this.onChange}
+                        error={errors.twitter}
+                    />
+                    <InputGroup
+                        placeholder="Facebook Page URL"
+                        name="facebook"
+                        icon="fab fa-facebook"
+                        value={this.state.facebook}
+                        onChange={this.onChange}
+                        error={errors.facebook}
+                    />
+                    <InputGroup
+                        placeholder="LinkedIn Profile URL"
+                        name="linkedin"
+                        icon="fab fa-linkedin"
+                        value={this.state.linkedin}
+                        onChange={this.onChange}
+                        error={errors.linkedin}
+                    />
+                    <InputGroup
+                        placeholder="Instagram Page URL"
+                        name="instagram"
+                        icon="fab fa-instagram"
+                        value={this.state.instagram}
+                        onChange={this.onChange}
+                        error={errors.instagram}
+                    />
+                </div>
+            );
+        }
+
+        // Select options for status
+        const options = [
+            { label: '* Select Professional Status', value: 0 },
+            { label: 'Developer', value: 'Developer' },
+            { label: 'Student', value: 'Student' }
+        ];
         return (
             <div className="create-profile">
                 <div className="container">
@@ -54,11 +116,28 @@ class CreateProfile extends Component {
                                     error={errors.handle}
                                     info="A unique handle for your profile URL. Your full name, company name, nickname."
                                 />
+                                <TextFieldGroup
+                                    placeholder="Location"
+                                    name="location"
+                                    value={this.state.location}
+                                    onChange={this.onChange}
+                                    error={errors.location}
+                                    info="City or city & state suggested (eg. Heilbronn, BW)"
+                                />
+                                <div className="mb-3">
+                                    <button type="button" onClick={() => {
+                                        this.setState(prevState => ({
+                                            displaySocialInputs: !prevState.displaySocialInputs
+                                        }))
+                                    }} className="btn btn-light">Add Social Network</button>
+                                    <span className="text-muted"> Optional</span>
+                                </div>
+                                {socialInputs}
+                                <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
                             </form>
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
