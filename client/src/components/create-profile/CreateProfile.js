@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+// import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
-import SelectListGroup from '../common/SelectListGroup';
+// import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
@@ -93,11 +93,11 @@ class CreateProfile extends Component {
         }
 
         // Select options for status
-        const options = [
-            { label: '* Select Professional Status', value: 0 },
-            { label: 'Developer', value: 'Developer' },
-            { label: 'Student', value: 'Student' }
-        ];
+        // const options = [
+        //     { label: '* Select Professional Status', value: 0 },
+        //     { label: 'Developer', value: 'Developer' },
+        //     { label: 'Student', value: 'Student' }
+        // ];
         return (
             <div className="create-profile">
                 <div className="container">
