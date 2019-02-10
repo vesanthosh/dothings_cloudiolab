@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_ERRORS } from './types';
+import { GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM } from './types';
 import axios from 'axios';
 
 // Get list of todo items
@@ -70,5 +70,12 @@ export const addTodoItem = (itemData, history) => dispatch => {
 export const setItemLoading = () => {
     return {
         type: ITEMS_LOADING
+    }
+}
+
+// Clear the data on the state before gets logged out
+export const clearCurrentTodoItem = () => {
+    return {
+        type: CLEAR_CURRENT_TODOITEM
     }
 }
