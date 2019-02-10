@@ -48,7 +48,7 @@ export const setProfileLoading = () => {
     }
 }
 
-// Clear loading
+// Clear the data on the state before gets logged out
 export const clearCurrentProfile = () => {
     return {
         type: CLEAR_CURRENT_PROFILE
