@@ -1,7 +1,7 @@
 import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
-    items: [],
+    item: [],
     loading: false
 }
 
@@ -10,23 +10,23 @@ export default function (state = initialState, action) {
         case GET_ITEMS:
             return {
                 ...state, // keeping the current state or something like that.
-                items: action.payload, // updating initialState with action.payload
+                item: action.payload, // updating initialState with action.payload
                 loading: false // Disablling loading spinner once we get all the data.
             };
         case ADD_ITEM:
             return {
                 ...state,
-                items: [...state.items, action.payload]
+                item: [...state.item, action.payload]
             };
         case UPDATE_ITEM:
             return {
                 ...state,
-                items: [...state.items, action.payload]
+                item: [...state.item, action.payload]
             };
         case DELETE_ITEM:
             return {
                 ...state,
-                items: state.items.filter(item => item._id !== action.payload)
+                item: state.item.filter(item => item._id !== action.payload)
             };
         case ITEMS_LOADING:
             return {
