@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getTodoItems } from '../../actions/itemActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
+import ProfileAction from './ProfileAction';
 
 class Dashboard extends Component {
 
     componentDidMount() {
         this.props.getCurrentProfile();
+        this.props.getTodoItems();
     }
 
     render() {
         const { user } = this.props.auth;
-        const { profile, loading } = this.props.profile;
+        const { profile, loading } = this.props.profile; // loading is to give spinner to the user that something is loading
+        const { item } = this.props.item; // here also we have loading state but we get duplicate state error
 
         let dashboardContent;
 
@@ -52,13 +56,17 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
+    getTodoItems: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
     profile: state.profile,
-    auth: state.auth
+    auth: state.auth,
+    item: state.item
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, getTodoItems, deleteAccount })(Dashboard);
