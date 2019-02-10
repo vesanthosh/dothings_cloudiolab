@@ -1,7 +1,7 @@
-import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING, CLEAR_CURRENT_TODOITEM } from '../actions/types';
 
 const initialState = {
-    item: [],
+    item: null,
     loading: false
 }
 
@@ -33,6 +33,11 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: true // This will display loading spinner while all the data is loading.
             };
+        case CLEAR_CURRENT_TODOITEM:
+            return {
+                ...state,
+                item: null
+            }
         default:
             return state;
     }
