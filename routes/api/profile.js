@@ -28,6 +28,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         .catch(err => res.status(404).json(err));
 });
 
+// TODO: seperate the update logic
 // @route   POST api/profile
 // @desc    Create or edit user's profile
 // @access  Private
@@ -55,7 +56,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
     Profile.findOne({ user: req.user.id })
         .then(profile => {
-            // Update
+            // Update //TODO: update only fields without handle as it is unique for everyone and they can't able to change after this.
             if (profile) {
                 Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true })
                     .then(profile => res.json(profile));
