@@ -14,6 +14,10 @@ class Dashboard extends Component {
         this.props.getTodoItems();
     }
 
+    onDeleteClick(e) {
+        this.props.deleteAccount();
+    }
+
     render() {
         const { user } = this.props.auth;
         const { profile, loading } = this.props.profile; // loading is to give spinner to the user that something is loading
@@ -26,7 +30,15 @@ class Dashboard extends Component {
         } else {
             // Check if logged in user has profile data
             if (Object.keys(profile).length > 0) {
-                dashboardContent = <h4>TODO: Display Profile</h4>
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
+                        <ProfileAction />
+                        {/* TODO: add todo list */}
+                        <div style={{ marginBottom: '60px' }} />
+                        <button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account</button>
+                    </div>
+                );
             } else {
                 // User is logged in but has no profile
                 dashboardContent = (
