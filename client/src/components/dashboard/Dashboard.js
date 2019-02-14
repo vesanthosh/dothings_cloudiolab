@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentProfile } from '../../actions/profileActions';
 import { getTodoItems } from '../../actions/itemActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
-import ProfileAction from './ProfileAction';
+import TodoItem from './TodoItem';
 
 class Dashboard extends Component {
 
     componentDidMount() {
         this.props.getCurrentProfile();
         this.props.getTodoItems();
-    }
-
-    onDeleteClick(e) {
-        this.props.deleteAccount();
     }
 
     render() {
@@ -33,10 +29,13 @@ class Dashboard extends Component {
                 dashboardContent = (
                     <div>
                         <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
-                        <ProfileAction />
-                        {/* TODO: add todo list */}
-                        <div style={{ marginBottom: '60px' }} />
-                        <button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account</button>
+                        <div className="btn-group mb-4" role="group">
+                            <Link to="/add-todo-item" className="btn btn-primary btn-success">
+                                <i className="fas fa-plus" />{' '}Add Item
+                            </Link>
+                        </div>
+                        {/* passing item.todoItems array as a parameter/property */}
+                        <TodoItem todoItem={item.todoItems} />
                     </div>
                 );
             } else {
@@ -68,7 +67,6 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    deleteAccount: PropTypes.func.isRequired,
     getTodoItems: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
@@ -81,4 +79,4 @@ const mapStateToProps = (state) => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getTodoItems, deleteAccount })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, getTodoItems })(Dashboard);
