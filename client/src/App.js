@@ -18,6 +18,7 @@ import CreateProfile from './components/profile/CreateProfile';
 import store from './store';
 import EditProfile from './components/profile/EditProfile';
 import AddToDoItem from './components/todo_item/AddToDoItem';
+import EditTodoItem from './components/todo_item/EditTodoItem';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -61,6 +62,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/add-todo-item" component={AddToDoItem} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit-todo-item" component={EditTodoItem} />
               </Switch>
             </div>
             <Footer />
