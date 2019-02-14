@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
-import { clearCurrentProfile } from '../../actions/profileActions';
+import { clearCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import { clearCurrentTodoItem } from '../../actions/itemActions';
 
 class Navbar extends Component {
@@ -14,21 +14,31 @@ class Navbar extends Component {
         this.props.logoutUser(this.props.history);
     }
 
+    onDeleteClick(e) {
+        this.props.deleteAccount(); // TODO: change this route logic to authAction.js
+        this.props.logoutUser(this.props.history); // TODO: major issue and need to fix it as soon as possible
+    }
+
     render() {
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-            <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link> </li>
-                <li className="nav-item">
-                    <a href="\" className="nav-link" onClick={this.onLogoutClick.bind(this)}>
+                <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link> </li>
+                <li className="nav-item dropdown">
+                    <a href="\" className="nav-link dropdown-toggle" data-toggle="dropdown">{user.name}{' '}
                         <img className="rounded-circle"
                             src={user.avatar}
                             alt={user.name}
                             style={{ width: '25px', marginRight: '5px' }}
                             title="You must have a Gravatar connected to your email to display an image"
-                        />{' '}Logout {/*{' '} - this is for space */}
+                        />
                     </a>
+                    <div className="dropdown-menu">
+                        <Link to="/edit-profile" className="dropdown-item">Profile Settings</Link>
+                        <Link to="\" className="dropdown-item" onClick={this.onDeleteClick.bind(this)}>Delete Account</Link>
+                        <Link to="\" className="dropdown-item" onClick={this.onLogoutClick.bind(this)}>Logout</Link>
+                    </div>
                 </li>
             </ul>
         );
@@ -68,6 +78,7 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
 
@@ -75,4 +86,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser,clearCurrentProfile, clearCurrentTodoItem })(withRouter(Navbar)); // redirects to login page
+export default connect(mapStateToProps, { logoutUser,clearCurrentProfile, clearCurrentTodoItem, deleteAccount })(withRouter(Navbar)); // redirects to login page
