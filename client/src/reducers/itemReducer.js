@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING, CLEAR_CURRENT_TODOITEM } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING, CLEAR_CURRENT_TODOITEM, GET_SINGLE_ITEM } from '../actions/types';
 
 const initialState = {
     item: null,
@@ -8,6 +8,12 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ITEMS:
+            return {
+                ...state, // keeping the current state or something like that.
+                item: action.payload, // updating initialState with action.payload
+                loading: false // Disablling loading spinner once we get all the data.
+            };
+        case GET_SINGLE_ITEM:
             return {
                 ...state, // keeping the current state or something like that.
                 item: action.payload, // updating initialState with action.payload
