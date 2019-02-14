@@ -5,7 +5,7 @@ import { getCurrentProfile } from '../../actions/profileActions';
 import { getTodoItems } from '../../actions/itemActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
-import TodoItem from './TodoItem';
+import TodoItem from '../todo_item/TodoItem';
 
 class Dashboard extends Component {
 
