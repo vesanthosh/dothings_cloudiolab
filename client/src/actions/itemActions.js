@@ -17,9 +17,23 @@ export const getTodoItems = () => dispatch => {
             }));
 }
 
+// Add todo item
 export const addTodoItem = (itemData, history) => dispatch => {
     axios.post('/api/todoItem', itemData)
         .then(res => history.push('/dashboard'))
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+};
+
+// delete todo items
+export const deleteTodoItem = (id) => dispatch => {
+    axios.delete(`/api/todoItem/${id}`)
+        .then(res => dispatch({
+            type: GET_ITEMS,
+            payload: res.data
+        }))
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data
@@ -36,14 +50,6 @@ export const addTodoItem = (itemData, history) => dispatch => {
 //         }));
 // };
 
-// export const addItem = (item) => dispatch => {
-//     axios.post('/api/items', item)
-//         .then(res => dispatch({
-//             type: ADD_ITEM,
-//             payload: res.data
-//         }));
-// };
-
 // export const updateItem = (item) => dispatch => {
 //     axios.put(`/api/items/${item._id}`, item)
 //         .then(res => dispatch({
@@ -52,21 +58,7 @@ export const addTodoItem = (itemData, history) => dispatch => {
 //         }));
 // };
 
-// export const deleteItem = (_id) => dispatch => { // This _id could be anything.
-//     axios.delete(`/api/items/${_id}`)
-//         .then(res => dispatch({
-//             type: DELETE_ITEM,
-//             payload: _id
-//         }));
-// };
-
-// export const setItemsLoading = () => {
-//     return {
-//         type: ITEMS_LOADING
-//     };
-// };
-
-// Profile loading
+// Item loading
 export const setItemLoading = () => {
     return {
         type: ITEMS_LOADING
