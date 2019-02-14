@@ -14,10 +14,10 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/common/PrivateRoute';
-import CreateProfile from './components/create-profile/CreateProfile';
+import CreateProfile from './components/profile/CreateProfile';
 import store from './store';
-import EditProfile from './components/edit-profile/EditProfile';
-import AddToDoItem from './components/add-todo-items/AddToDoItem';
+import EditProfile from './components/profile/EditProfile';
+import AddToDoItem from './components/todo_item/AddToDoItem';
 
 // Check for token
 if (localStorage.jwtToken) {
