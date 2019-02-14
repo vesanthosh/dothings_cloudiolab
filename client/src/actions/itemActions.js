@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM } from './types';
+import { GET_ITEMS, GET_SINGLE_ITEM, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM } from './types';
 import axios from 'axios';
 
 // Get list of todo items
