@@ -22,9 +22,9 @@ class TodoItem extends Component {
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">{item.name}</h5>
                         <small>
-                            <button className="btn btn-warning btn-sm" onClick={this.onUpdateClick.bind(this, item._id)}>
+                            <Link to="/edit-todo-item" className="btn btn-warning btn-sm">
                                 <i className="fa fa-edit" />
-                            </button>{' '}
+                            </Link>{' '}
                             <button className="btn btn-danger btn-sm" onClick={this.onDeleteClick.bind(this, item._id)}>
                                 <i className="fa fa-trash" />
                             </button>
