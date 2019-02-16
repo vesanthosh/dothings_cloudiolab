@@ -34,7 +34,7 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoItem todoItem={item.todoItems} />
+                        <TodoItem item={item} />
                     </div>
                 );
             } else {

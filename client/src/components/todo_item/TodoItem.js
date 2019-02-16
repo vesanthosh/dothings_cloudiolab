@@ -16,7 +16,7 @@ class TodoItem extends Component {
     }
 
     render() {
-        const todoItem = this.props.todoItem.map(item => (
+        const todoItem = this.props.item.todoItems.map(item => (
             <div className="list-group">
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
