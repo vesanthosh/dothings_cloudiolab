@@ -6,6 +6,7 @@ import { getTodoItems } from '../../actions/itemActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
 import TodoItem from '../todo_item/TodoItem';
+import AddToDoItem from '../todo_item/AddToDoItem';
 
 class Dashboard extends Component {
 
@@ -30,9 +31,7 @@ class Dashboard extends Component {
                     <div>
                         <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
                         <div className="btn-group mb-4" role="group">
-                            <Link to="/add-todo-item" className="btn btn-primary btn-success">
-                                <i className="fas fa-plus" />{' '}Add Item
-                            </Link>
+                            <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
                         <TodoItem todoItem={item.todoItems} />

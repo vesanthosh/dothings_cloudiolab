@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addTodoItem } from '../../actions/itemActions';
+import { Modal, ModalHeader } from 'reactstrap';
 
 class AddToDoItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            modal: false,
             name: '',
             description: '',
             errors: {}
@@ -17,6 +19,12 @@ class AddToDoItem extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    toggle = () => {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -32,7 +40,9 @@ class AddToDoItem extends Component {
             name: this.state.name,
             description: this.state.description
         };
-        this.props.addTodoItem(itemData, this.props.history); // if you want to redirect, you need to pass this history in your action
+        this.props.addTodoItem(itemData);
+        // TODO: Before close we have to clear the state and prevent closing the modal with error message
+        this.toggle();
     }
 
     onChange(e) {
@@ -44,11 +54,12 @@ class AddToDoItem extends Component {
 
         return (
             <div className="add-todo-item">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <Link to="/dashboard" className="btn btn-light">Go Back</Link>
-                            <h1 className="display-4 text-center">Add Todo Item</h1>
+                <button type="button" className="btn btn-primary btn-success" onClick={this.toggle}>
+                    <i className="fas fa-plus" />{' '}Add Item
+                </button>
+                <Modal isOpen={this.state.modal}>
+                    <ModalHeader toggle={this.toggle}>Add Todo Item</ModalHeader>
+                    <div className="modal-body">
                             <p className="lead text-center">Add anything that you want to do.</p>
                             <small className="d-block pb-3">* = required fields</small>
                             <form onSubmit={this.onSubmit}>
@@ -66,11 +77,10 @@ class AddToDoItem extends Component {
                                     onChange={this.onChange}
                                     error={errors.description}
                                 />
-                                <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
+                            <input type="submit" value="Submit" className="btn btn-info float-right" />
                             </form>
                         </div>
-                    </div>
-                </div>
+                </Modal>
             </div >
         );
     }

@@ -17,7 +17,6 @@ import PrivateRoute from './components/common/PrivateRoute';
 import CreateProfile from './components/profile/CreateProfile';
 import store from './store';
 import EditProfile from './components/profile/EditProfile';
-import AddToDoItem from './components/todo_item/AddToDoItem';
 import EditTodoItem from './components/todo_item/EditTodoItem';
 
 // Check for token
@@ -59,9 +58,6 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/add-todo-item" component={AddToDoItem} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/edit-todo-item" component={EditTodoItem} />
