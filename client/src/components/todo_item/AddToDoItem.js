@@ -42,10 +42,8 @@ class AddToDoItem extends Component {
         };
         this.props.addTodoItem(itemData);
         // TODO: Before close we have to clear the state and prevent closing the modal with error message
-        if (!this.state.errors) {
             this.toggle();
         }
-    }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
