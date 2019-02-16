@@ -60,26 +60,26 @@ class AddToDoItem extends Component {
                 <Modal isOpen={this.state.modal}>
                     <ModalHeader toggle={this.toggle}>Add Todo Item</ModalHeader>
                     <div className="modal-body">
-                            <p className="lead text-center">Add anything that you want to do.</p>
-                            <small className="d-block pb-3">* = required fields</small>
-                            <form onSubmit={this.onSubmit}>
-                                <TextFieldGroup
-                                    placeholder="* Todo Item Name"
-                                    name="name"
-                                    value={this.state.name}
-                                    onChange={this.onChange}
-                                    error={errors.name}
-                                />
-                                <TextAreaFieldGroup
-                                    placeholder="Description"
-                                    name="description"
-                                    value={this.state.description}
-                                    onChange={this.onChange}
-                                    error={errors.description}
-                                />
+                        <p className="lead text-center">Add anything that you want to do.</p>
+                        <small className="d-block pb-3">* = required fields</small>
+                        <form onSubmit={this.onSubmit}>
+                            <TextFieldGroup
+                                placeholder="* Todo Item Name"
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.onChange}
+                                error={errors.name}
+                            />
+                            <TextAreaFieldGroup
+                                placeholder="Description"
+                                name="description"
+                                value={this.state.description}
+                                onChange={this.onChange}
+                                error={errors.description}
+                            />
                             <input type="submit" value="Submit" className="btn btn-info float-right" />
-                            </form>
-                        </div>
+                        </form>
+                    </div>
                 </Modal>
             </div >
         );
