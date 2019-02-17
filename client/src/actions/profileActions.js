@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logoutUser } from './authActions';
 import { GET_ERRORS, GET_CURRENT_USER_PROFILE, PROFILES_LOADING, CLEAR_CURRENT_USER_PROFILE } from './types';
 
 
@@ -8,12 +9,12 @@ export const getCurrentProfile = () => dispatch => {
     axios.get('/api/profile')
         .then(res => dispatch({
             type: GET_CURRENT_USER_PROFILE,
-                payload: res.data
-            }))
+            payload: res.data
+        }))
         .catch(err => dispatch({
             type: GET_CURRENT_USER_PROFILE,
-                payload: {}
-            }));
+            payload: {}
+        }));
 }
 
 // Delete account & Profile
