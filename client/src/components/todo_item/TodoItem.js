@@ -39,15 +39,15 @@ class TodoItem extends Component {
         return (
             < div >
                 <div className="mb-4">
-                    <h4>Upcoming Tasks</h4>
-                    <p className="mb-1">You have no upcoming tasks to do.</p>
+                    {/* <h4>Upcoming Tasks</h4>
+                    <p className="mb-1">You have no upcoming tasks to do.</p> */}
                     {upcomingTodos}
                 </div>
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <h4>Tasks Completed</h4>
                     <p className="mb-1">You have no tasks completed till so far.</p>
                     {upcomingTodos}
-                </div>
+                </div> */}
             </div >
         );
     }
