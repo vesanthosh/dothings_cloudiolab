@@ -12,25 +12,25 @@ class TodoItem extends Component {
     }
 
     render() {
-        const todoItem = this.props.item.todoItems.map(item => (
+        const upcomingTodos = this.props.upcomingTodos.map(upcomingTodos => ( // TODO: Found profile problems and need to resolve this.
             <div className="list-group">
                 <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1">{item.name}</h5>
+                        <h5 className="mb-1">{upcomingTodos.name}</h5>
                         <small>
                             <div className="row">
-                                <EditTodoItem _id={item._id} name={item.name} description={item.description} />{' '}
+                                <EditTodoItem _id={upcomingTodos._id} name={upcomingTodos.name} description={upcomingTodos.description} />{' '}
                                 <div class="col-md-6">
-                                    <button className="btn btn-danger btn-sm custom-button-width" onClick={this.onDeleteClick.bind(this, item._id)}>
+                                    <button className="btn btn-danger btn-sm custom-button-width" onClick={this.onDeleteClick.bind(this, upcomingTodos._id)}>
                                         <i className="fa fa-trash" />
                                     </button>
                                 </div>
                             </div>
                         </small>
                     </div>
-                    <p className="mb-1">{item.description}</p>
+                    <p className="mb-1">{upcomingTodos.description}</p>
                     <small>
-                        <Moment fromNow>{item.date}</Moment>
+                        <Moment fromNow>{upcomingTodos.date}</Moment>
                     </small>
                 </a>
             </div >
@@ -39,12 +39,14 @@ class TodoItem extends Component {
         return (
             < div >
                 <div className="mb-4">
-                    <h4 className="mb-3">Upcoming Tasks</h4>
-                    {todoItem}
+                    <h4>Upcoming Tasks</h4>
+                    <p className="mb-1">You have no upcoming tasks to do.</p>
+                    {upcomingTodos}
                 </div>
                 <div className="mb-4">
-                    <h4 className="mb-3">Tasks Completed</h4>
-                {todoItem}
+                    <h4>Tasks Completed</h4>
+                    <p className="mb-1">You have no tasks completed till so far.</p>
+                    {upcomingTodos}
                 </div>
             </div >
         );

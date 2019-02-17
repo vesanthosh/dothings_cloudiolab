@@ -29,12 +29,12 @@ class Dashboard extends Component {
             if (Object.keys(profile).length > 0) {
                 dashboardContent = (
                     <div>
-                        <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link></p>
+                        <p className="lead text-muted">Welcome <Link to={`/profile/${currentUserProfile.handle}`}>{user.name}</Link></p>
                         <div className="btn-group mb-4" role="group">
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoItem item={item} />
+                        <TodoItem upcomingTodos={upcomingTodos} />
                     </div>
                 );
             } else {
