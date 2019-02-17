@@ -2,11 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require('path');
-const items = require("./routes/api/items");
+const passport = require('passport');
+
+// Supplying API routes
+const user = require('./routes/api/user');
+const profile = require("./routes/api/profile");
+const todoItem = require("./routes/api/todoItem");
 
 const app = express();
 
 // Bodyparser Middleware
+app.use(bodyParser.urlencoded({ extended: false })); // need to verify and check
 app.use(bodyParser.json());
 
 // DB Config
@@ -16,11 +22,18 @@ const db_url = require("./config/keys").mongoURI; // Have to implement collectio
 mongoose.connect(db_url, { useNewUrlParser: true }, function (err, db) {
   if (!err) console.log("MongoDB Connected...");
   else console.log(err);
-}
-);
+});
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport); // Passing "passport" and it has many authentication strategy such as local, google and jwt like that.
 
 // User Routes
-app.use("/api/items", items);
+app.use('/api/user', user);
+app.use("/api/profile", profile);
+app.use("/api/todoItem", todoItem);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
