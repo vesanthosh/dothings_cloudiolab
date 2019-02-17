@@ -1,8 +1,8 @@
 import { PROFILES_LOADING, GET_CURRENT_USER_PROFILE, CLEAR_CURRENT_USER_PROFILE } from '../actions/types';
 
 const initialState = {
-    profile: {},
-    profiles: null,
+    currentUserProfile: null,
+    otherUsersProfile: null,
     loading: false
 };
 

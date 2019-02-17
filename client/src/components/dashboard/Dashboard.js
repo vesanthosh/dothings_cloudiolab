@@ -69,11 +69,11 @@ Dashboard.propTypes = {
     getTodoItems: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    item: PropTypes.object.isRequired
+    profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    profile: state.profile,
+    profiles: state.profiles,
     auth: state.auth,
     item: state.item
 });

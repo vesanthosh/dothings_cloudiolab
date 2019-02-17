@@ -36,8 +36,8 @@ class CreateProfile extends Component {
             this.setState({ errors: nextProps.errors });
         }
 
-        if (nextProps.profile.profile) {
-            const profile = nextProps.profile.profile;
+        if (nextProps.profiles.currentUserProfile) {
+            const profile = nextProps.profiles.currentUserProfile;
             // Bring skills array back to csv
             // const skillsCSV = profile.skills.join(',');
 
@@ -175,12 +175,12 @@ class CreateProfile extends Component {
 CreateProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired,
+    profiles: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    profile: state.profile,
+    profiles: state.profiles,
     errors: state.errors
 });
 
