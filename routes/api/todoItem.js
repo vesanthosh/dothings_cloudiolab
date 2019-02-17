@@ -99,13 +99,20 @@ router.put('/:todoItem_id', passport.authenticate('jwt', { session: false }), (r
                 errors.noitemfound = 'Item not found with id ' + req.params.todoItem_id;
                 res.status(404).json(errors);
             } else {
-                // Update todo item
+                // // Update todo item // Get only single updated item
+                // TodoItem.findOneAndUpdate({ user: req.user.id, 'todoItems._id': req.params.todoItem_id }, {
+                //     $set: {
+                //         'todoItems.$.name': req.body.name,
+                //         'todoItems.$.description': req.body.description || 'No description'
+                //     }
+                // }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem.todoItems[itemIndex]));
+                // Update todo item // Get the complete state
                 TodoItem.findOneAndUpdate({ user: req.user.id, 'todoItems._id': req.params.todoItem_id }, {
                     $set: {
                         'todoItems.$.name': req.body.name,
                         'todoItems.$.description': req.body.description || 'No description'
                     }
-                }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem.todoItems[itemIndex]));
+                }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem));
             }
         }).catch(err => res.status(500).json({ message: err.message || "Error while retrieving an item with id " + req.params.todoItem_id }));
 });
