@@ -1,4 +1,4 @@
-import { GET_ITEMS, GET_SINGLE_ITEM, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM, DELETE_ITEM } from './types';
+import { GET_ITEMS, GET_SINGLE_ITEM, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM, DELETE_ITEM, UPDATE_ITEM } from './types';
 import axios from 'axios';
 
 // Get list of todo items
@@ -28,7 +28,7 @@ export const getSingleTodoItem = (id) => dispatch => {
             }))
         .catch(err =>
             dispatch({
-                type: GET_SINGLE_ITEM,
+                type: GET_ERRORS,
                 payload: err.response.data
             }));
 }
@@ -59,13 +59,18 @@ export const deleteTodoItem = (id) => dispatch => {
         }));
 };
 
-// export const updateItem = (item) => dispatch => {
-//     axios.put(`/api/items/${item._id}`, item)
-//         .then(res => dispatch({
-//             type: UPDATE_ITEM,
-//             payload: res.data
-//         }));
-// };
+// Update todo item // TODO: improve the state
+export const editTodoItem = (id, item) => dispatch => {
+    axios.put(`/api/todoItem/${id}`, item)
+        .then(res => dispatch({
+            type: UPDATE_ITEM,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+};
 
 // Item loading
 export const setItemLoading = () => {

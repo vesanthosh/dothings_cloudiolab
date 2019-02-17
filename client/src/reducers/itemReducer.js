@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
         case UPDATE_ITEM:
             return {
                 ...state,
-                item: [...state.item, action.payload]
+                item: action.payload
             };
         case DELETE_ITEM:
             return {

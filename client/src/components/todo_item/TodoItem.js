@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment'; // it is used to format the date from mongodb
 import { deleteTodoItem } from '../../actions/itemActions';
+import EditTodoItem from '../todo_item/EditTodoItem';
 
 class TodoItem extends Component {
 
     onDeleteClick(id) {
         this.props.deleteTodoItem(id);
-    }
-
-    onUpdateClick(id) {
-        console.log("Item can be updated.")
     }
 
     render() {
@@ -22,12 +18,14 @@ class TodoItem extends Component {
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">{item.name}</h5>
                         <small>
-                            <Link to="/edit-todo-item" className="btn btn-warning btn-sm">
-                                <i className="fa fa-edit" />
-                            </Link>{' '}
-                            <button className="btn btn-danger btn-sm" onClick={this.onDeleteClick.bind(this, item._id)}>
-                                <i className="fa fa-trash" />
-                            </button>
+                            <div className="row">
+                                <EditTodoItem _id={item._id} name={item.name} description={item.description} />{' '}
+                                <div class="col-md-6">
+                                    <button className="btn btn-danger btn-sm custom-button-width" onClick={this.onDeleteClick.bind(this, item._id)}>
+                                        <i className="fa fa-trash" />
+                                    </button>
+                                </div>
+                            </div>
                         </small>
                     </div>
                     <p className="mb-1">{item.description}</p>
@@ -35,7 +33,7 @@ class TodoItem extends Component {
                         <Moment fromNow>{item.date}</Moment>
                     </small>
                 </a>
-            </div>
+            </div >
         ));
 
         return (
