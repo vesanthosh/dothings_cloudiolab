@@ -1,48 +1,49 @@
-import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, DELETE_ITEM, ITEMS_LOADING, CLEAR_CURRENT_TODOITEM, GET_SINGLE_ITEM } from '../actions/types';
+import { GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, UPDATE_TODO, DELETE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS } from '../actions/types';
 
 const initialState = {
-    item: null,
+    upcomingTodos: null,
+    completedTodos: null,
     loading: false
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case GET_ITEMS:
+        case GET_UPCOMING_TODOS:
             return {
                 ...state, // keeping the current state or something like that.
-                item: action.payload, // updating initialState with action.payload
+                upcomingTodos: action.payload, // updating initialState with action.payload
                 loading: false // Disablling loading spinner once we get all the data.
             };
-        case GET_SINGLE_ITEM:
+        case GET_SINGLE_UPCOMING_TODO:
             return {
                 ...state, // keeping the current state or something like that.
-                item: action.payload, // updating initialState with action.payload
+                upcomingTodos: action.payload, // updating initialState with action.payload
                 loading: false // Disablling loading spinner once we get all the data.
             };
-        case ADD_ITEM:
+        case ADD_TODO:
             return {
                 ...state,
-                item: action.payload
+                upcomingTodos: action.payload
             };
-        case UPDATE_ITEM:
+        case UPDATE_TODO:
             return {
                 ...state,
-                item: action.payload
+                upcomingTodos: action.payload
             };
-        case DELETE_ITEM:
+        case DELETE_TODO:
             return {
                 ...state,
-                item: action.payload
+                upcomingTodos: action.payload
             };
-        case ITEMS_LOADING:
+        case TODOS_LOADING:
             return {
                 ...state,
                 loading: true // This will display loading spinner while all the data is loading.
             };
-        case CLEAR_CURRENT_TODOITEM:
+        case CLEAR_CURRENT_TODOS:
             return {
                 ...state,
-                item: null
+                upcomingTodos: null
             }
         default:
             return state;
