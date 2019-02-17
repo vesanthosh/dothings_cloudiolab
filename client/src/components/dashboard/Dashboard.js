@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profileActions';
 import { getTodoItems } from '../../actions/itemActions';
+import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
 import TodoItem from '../todo_item/TodoItem';
@@ -11,8 +11,8 @@ import AddToDoItem from '../todo_item/AddToDoItem';
 class Dashboard extends Component {
 
     componentDidMount() {
-        this.props.getCurrentProfile();
         this.props.getTodoItems();
+        this.props.getCurrentProfile();
     }
 
     render() {
@@ -22,11 +22,11 @@ class Dashboard extends Component {
 
         let dashboardContent;
 
-        if (profile === null || loading) {
+        if (currentUserProfile === null || loading) {
             dashboardContent = <Spinner />
         } else {
             // Check if logged in user has profile data
-            if (Object.keys(profile).length > 0) {
+            if (Object.keys(currentUserProfile).length > 0) {
                 dashboardContent = (
                     <div>
                         <p className="lead text-muted">Welcome <Link to={`/profile/${currentUserProfile.handle}`}>{user.name}</Link></p>
