@@ -20,7 +20,7 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) 
                 errors.noprofile = 'There is no profile for this user. First create user profile to add your favourite todo item.';
                 return res.status(404).json(errors);
             }
-            res.json(todoItem);
+            res.json(todoItem.todoItems);
         })
         .catch(err => res.status(500).json({ message: err.message || "Error occurred while retrieving todo items. Internal Server Error 500." }));
 });
@@ -68,7 +68,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
                 // Save or create Profile with that handle
                 todoItem.todoItems.unshift(newTodoItem);
                 todoItem.save()
-                    .then(todoItem => res.json(todoItem));
+                    .then(todoItem => res.json(todoItem.todoItems));
             } else {
                 errors.noprofile = 'There is no profile for this user. First create user profile to add your favourite todo item.';
                 res.status(404).json(errors);
@@ -112,7 +112,7 @@ router.put('/:todoItem_id', passport.authenticate('jwt', { session: false }), (r
                         'todoItems.$.name': req.body.name,
                         'todoItems.$.description': req.body.description || 'No description'
                     }
-                }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem));
+                }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem.todoItems));
             }
         }).catch(err => res.status(500).json({ message: err.message || "Error while retrieving an item with id " + req.params.todoItem_id }));
 });
@@ -138,7 +138,7 @@ router.delete('/:todoItem_id', passport.authenticate('jwt', { session: false }),
                 todoItem.todoItems.splice(removeIndex, 1);
                 // Save
                 todoItem.save()
-                    .then(todoItem => res.json(todoItem));
+                    .then(todoItem => res.json(todoItem.todoItems));
             }
         }).catch(err => res.status(500).json(err));
 });
