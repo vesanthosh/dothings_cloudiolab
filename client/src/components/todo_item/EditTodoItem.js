@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
@@ -90,4 +89,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { editTodoItem })(withRouter(EditTodoItem));
+export default connect(mapStateToProps, { editTodoItem })(EditTodoItem);
