@@ -38,8 +38,14 @@ class TodoItem extends Component {
 
         return (
             < div >
-                <h4 className="mb-4">List of things you have to do</h4>
+                <div className="mb-4">
+                    <h4 className="mb-3">Upcoming Tasks</h4>
+                    {todoItem}
+                </div>
+                <div className="mb-4">
+                    <h4 className="mb-3">Tasks Completed</h4>
                 {todoItem}
+                </div>
             </div >
         );
     }
