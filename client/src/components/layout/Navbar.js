@@ -15,8 +15,7 @@ class Navbar extends Component {
     }
 
     onDeleteClick(e) {
-        this.props.deleteAccount(); // TODO: change this route logic to authAction.js
-        this.props.logoutUser(this.props.history); // TODO: major issue and need to fix it as soon as possible
+        this.props.deleteAccount();
     }
 
     render() {
