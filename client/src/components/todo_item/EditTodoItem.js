@@ -81,7 +81,6 @@ class EditTodoItem extends Component {
 }
 
 EditTodoItem.propTypes = {
-    item: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 

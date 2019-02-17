@@ -17,8 +17,8 @@ class Dashboard extends Component {
 
     render() {
         const { user } = this.props.auth;
-        const { profile, loading } = this.props.profile; // loading is to give spinner to the user that something is loading
-        const { item } = this.props.item; // here also we have loading state but we get duplicate state error
+        const { currentUserProfile, loading } = this.props.profiles; // loading is to give spinner to the user that something is loading
+        const { upcomingTodos } = this.props.todoItems; // here also we have loading state but we get duplicate state error
 
         let dashboardContent;
 
@@ -67,15 +67,15 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     getTodoItems: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    todoItems: PropTypes.object.isRequired,
     profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
     profiles: state.profiles,
     auth: state.auth,
-    item: state.item
+    todoItems: state.todoItems
 });
 
 export default connect(mapStateToProps, { getCurrentProfile, getTodoItems })(Dashboard);

@@ -146,12 +146,10 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-    profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    profile: state.profile,
     errors: state.errors
 });
 

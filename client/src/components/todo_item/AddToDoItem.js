@@ -87,12 +87,10 @@ class AddToDoItem extends Component {
 
 AddToDoItem.propTypes = {
     addTodoItem: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    profile: state.profile,
     errors: state.errors
 });
 
