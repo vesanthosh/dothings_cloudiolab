@@ -1,18 +1,17 @@
 import axios from 'axios';
-import { GET_CURRENT_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, GET_CURRENT_USER_PROFILE, PROFILES_LOADING, CLEAR_CURRENT_USER_PROFILE } from './types';
+
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
     axios.get('/api/profile')
-        .then(res =>
-            dispatch({
-                type: GET_CURRENT_PROFILE,
+        .then(res => dispatch({
+            type: GET_CURRENT_USER_PROFILE,
                 payload: res.data
             }))
-        .catch(err =>
-            dispatch({
-                type: GET_CURRENT_PROFILE,
+        .catch(err => dispatch({
+            type: GET_CURRENT_USER_PROFILE,
                 payload: {}
             }));
 }
@@ -21,12 +20,11 @@ export const getCurrentProfile = () => dispatch => {
 export const deleteAccount = () => dispatch => {
     if (window.confirm('Are you sure? This can not be undone!')) {
         axios.delete('/api/profile')
-            .then(res => dispatch({
-                type: SET_CURRENT_USER,
-                payload: {}
-            })).catch(err => dispatch({
+            .then(res => dispatch(
+                logoutUser()
+            )).catch(err => dispatch({
                 type: GET_ERRORS,
-                payload: err.response.data
+                payload: {}
             }));
     }
 }
@@ -44,13 +42,13 @@ export const createProfile = (profileData, history) => dispatch => {
 // Profile loading
 export const setProfileLoading = () => {
     return {
-        type: PROFILE_LOADING
+        type: PROFILES_LOADING
     }
 }
 
 // Clear the data on the state before gets logged out
 export const clearCurrentProfile = () => {
     return {
-        type: CLEAR_CURRENT_PROFILE
+        type: CLEAR_CURRENT_USER_PROFILE
     }
 }

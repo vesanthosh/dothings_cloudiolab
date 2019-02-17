@@ -1,29 +1,27 @@
-import { GET_ITEMS, GET_SINGLE_ITEM, ADD_ITEM, ITEMS_LOADING, GET_ERRORS, CLEAR_CURRENT_TODOITEM, DELETE_ITEM, UPDATE_ITEM } from './types';
+import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, DELETE_TODO, UPDATE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS } from './types';
 import axios from 'axios';
 
 // Get list of todo items
 export const getTodoItems = () => dispatch => {
-    dispatch(setItemLoading());
     axios.get('/api/todoItem/all')
         .then(res =>
             dispatch({
-                type: GET_ITEMS,
+                type: GET_UPCOMING_TODOS,
                 payload: res.data
             }))
         .catch(err =>
             dispatch({
-                type: GET_ITEMS,
+                type: GET_UPCOMING_TODOS,
                 payload: err.response.data
             }));
 }
 
 // Get single todo item
 export const getSingleTodoItem = (id) => dispatch => {
-    dispatch(setItemLoading());
     axios.get(`/api/todoItem/${id}`)
         .then(res =>
             dispatch({
-                type: GET_SINGLE_ITEM,
+                type: GET_SINGLE_UPCOMING_TODO,
                 payload: res.data
             }))
         .catch(err =>
@@ -37,7 +35,7 @@ export const getSingleTodoItem = (id) => dispatch => {
 export const addTodoItem = (itemData) => dispatch => {
     axios.post('/api/todoItem', itemData)
         .then(res => dispatch({
-            type: ADD_ITEM,
+            type: ADD_TODO,
             payload: res.data
         }))
         .catch(err => dispatch({
@@ -50,7 +48,7 @@ export const addTodoItem = (itemData) => dispatch => {
 export const deleteTodoItem = (id) => dispatch => {
     axios.delete(`/api/todoItem/${id}`)
         .then(res => dispatch({
-            type: DELETE_ITEM,
+            type: DELETE_TODO,
             payload: res.data
         }))
         .catch(err => dispatch({
@@ -63,7 +61,7 @@ export const deleteTodoItem = (id) => dispatch => {
 export const editTodoItem = (id, item) => dispatch => {
     axios.put(`/api/todoItem/${id}`, item)
         .then(res => dispatch({
-            type: UPDATE_ITEM,
+            type: UPDATE_TODO,
             payload: res.data
         }))
         .catch(err => dispatch({
@@ -75,13 +73,13 @@ export const editTodoItem = (id, item) => dispatch => {
 // Item loading
 export const setItemLoading = () => {
     return {
-        type: ITEMS_LOADING
+        type: TODOS_LOADING
     }
 }
 
 // Clear the data on the state before gets logged out
 export const clearCurrentTodoItem = () => {
     return {
-        type: CLEAR_CURRENT_TODOITEM
+        type: CLEAR_CURRENT_TODOS
     }
 }
