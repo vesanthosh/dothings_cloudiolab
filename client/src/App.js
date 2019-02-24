@@ -5,7 +5,6 @@ import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
 import { Provider } from 'react-redux';
-
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
@@ -14,9 +13,12 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/common/PrivateRoute';
-import CreateProfile from './components/profile/CreateProfile';
+import CreateProfile from './components/userProfile/CreateProfile';
 import store from './store';
-import EditProfile from './components/profile/EditProfile';
+import EditProfile from './components/userProfile/EditProfile';
+import PublicProfiles from './components/publicProfile/PublicProfiles';
+import ProfileDisplay from './components/profileDisplay/ProfileDisplay';
+import NotFound from './components/notFound/NotFound';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -49,6 +51,8 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/public-profiles" component={PublicProfiles} />
+              <Route exact path="/profile/:handle" component={ProfileDisplay} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
@@ -58,6 +62,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/edit-profile" component={EditProfile} />
               </Switch>
+              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>

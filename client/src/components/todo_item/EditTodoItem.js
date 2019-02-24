@@ -4,7 +4,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader } from 'reactstrap';
-import { editTodoItem } from '../../actions/itemActions'; // TODO: create editTodoItem in itemActions.js
+import { editTodoItem } from '../../actions/itemActions';
 
 class EditTodoItem extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class EditTodoItem extends Component {
             name: this.state.name,
             description: this.state.description
         };
-        this.props.editTodoItem(this.state._id, newItemData); // if you want to redirect, you need to pass this history in your action
+        this.props.editTodoItem(this.state._id, newItemData);
         // Close modal
         this.toggle();
     }

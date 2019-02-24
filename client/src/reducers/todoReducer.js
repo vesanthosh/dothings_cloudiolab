@@ -43,8 +43,9 @@ export default function (state = initialState, action) {
         case CLEAR_CURRENT_TODOS:
             return {
                 ...state,
-                upcomingTodos: null
-            }
+                upcomingTodos: null,
+                completedTodos: null
+            };
         default:
             return state;
     }

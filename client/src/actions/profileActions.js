@@ -1,7 +1,34 @@
 import axios from 'axios';
 import { logoutUser } from './authActions';
-import { GET_ERRORS, GET_CURRENT_USER_PROFILE, PROFILES_LOADING, CLEAR_CURRENT_USER_PROFILE } from './types';
+import { GET_ERRORS, GET_CURRENT_USER_PROFILE, PROFILES_LOADING, CLEAR_CURRENT_USER_PROFILE, GET_PUBLIC_PROFILES, GET_PUBLIC_USER_PROFILE } from './types';
 
+// Get public profiles
+export const getPublicProfiles = () => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get('/api/profile/all')
+        .then(res => dispatch({
+            type: GET_PUBLIC_PROFILES,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_PUBLIC_PROFILES,
+            payload: {}
+        }));
+}
+
+// Get public profile by handle
+export const getPublicProfileByHandle = (handle) => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get(`/api/profile/${handle}`)
+        .then(res => dispatch({
+            type: GET_PUBLIC_USER_PROFILE,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_PUBLIC_USER_PROFILE,
+            payload: null
+        }));
+}
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {

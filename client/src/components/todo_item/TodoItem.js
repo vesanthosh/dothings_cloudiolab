@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment'; // it is used to format the date from mongodb
+import Moment from 'react-moment'; // used to format the date from mongodb
 import { deleteTodoItem } from '../../actions/itemActions';
 import EditTodoItem from '../todo_item/EditTodoItem';
 
@@ -12,15 +12,15 @@ class TodoItem extends Component {
     }
 
     render() {
-        const upcomingTodos = this.props.upcomingTodos.map(upcomingTodos => ( // TODO: Found profile problems and need to resolve this.
-            <div className="list-group">
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+        const upcomingTodos = this.props.upcomingTodos.map(upcomingTodos => ( // TODO: Found profile problems and need to resolve this. till so far not problem
+            <div key={upcomingTodos._id} className="list-group">
+                <a href="#/" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                         <h5 className="mb-1">{upcomingTodos.name}</h5>
                         <small>
                             <div className="row">
                                 <EditTodoItem _id={upcomingTodos._id} name={upcomingTodos.name} description={upcomingTodos.description} />{' '}
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                     <button className="btn btn-danger btn-sm custom-button-width" onClick={this.onDeleteClick.bind(this, upcomingTodos._id)}>
                                         <i className="fa fa-trash" />
                                     </button>

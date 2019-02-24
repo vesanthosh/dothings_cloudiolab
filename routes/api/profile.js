@@ -10,6 +10,40 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const TodoItem = require('../../models/TodoItem');
 
+// @route   GET api/profile/all
+// @desc    Get all public profiles
+// @access  Public
+router.get('/all', (req, res) => {
+    const errors = {};
+    Profile.find()
+        .populate('user', ['name', 'avatar'])
+        .then(profiles => {
+            if (!profiles) {
+                errors.nopublicprofiles = 'There are no public profiles';
+                return res.status(404).json(errors);
+            }
+            res.json(profiles);
+        })
+        .catch(err => res.status(404).json(err));
+});
+
+// @route   GET api/profile/:handle
+// @desc    Get profile by handle
+// @access  Public
+router.get('/:handle', (req, res) => {
+    const errors = {};
+    Profile.findOne({ handle: req.params.handle })
+        .populate('user', ['name', 'avatar'])
+        .then(profile => {
+            if (!profile) {
+                errors.handle = 'There is no profile for this user';
+                res.status(404).json(errors);
+            }
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err));
+});
+
 // @route   GET api/profile
 // @desc    Get current user's profile
 // @access  Private

@@ -37,8 +37,7 @@ app.use("/api/todoItem", todoItem);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-
-  // Set statci folder
+  // Set static folder
   app.use(express.static('client/build'));
 
   // redirecting routes to the default page.
