@@ -1,8 +1,8 @@
 import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, DELETE_TODO, UPDATE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS } from './types';
 import axios from 'axios';
 
-// Get list of todo items
-export const getTodoItems = () => dispatch => {
+// Get list of upcoming todo items
+export const getUpcomingTodoItems = () => dispatch => {
     axios.get('/api/todoItem/all')
         .then(res =>
             dispatch({
@@ -14,6 +14,10 @@ export const getTodoItems = () => dispatch => {
                 type: GET_UPCOMING_TODOS,
                 payload: err.response.data
             }));
+}
+
+// Get list of completed todo items
+export const getCompletedTodoItems = () => dispatch => {
     axios.get('/api/todoItem/all')
         .then(res =>
             dispatch({

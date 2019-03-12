@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTodoItems } from '../../actions/itemActions';
+import { getUpcomingTodoItems, getCompletedTodoItems } from '../../actions/itemActions';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,8 @@ import AddToDoItem from '../todo_item/AddToDoItem';
 class Dashboard extends Component {
 
     componentDidMount() {
-        this.props.getTodoItems();
+        this.props.getUpcomingTodoItems();
+        this.props.getCompletedTodoItems();
         this.props.getCurrentProfile();
     }
 
@@ -67,7 +68,8 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    getTodoItems: PropTypes.func.isRequired,
+    getUpcomingTodoItems: PropTypes.func.isRequired,
+    getCompletedTodoItems: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     todoItems: PropTypes.object.isRequired,
     profiles: PropTypes.object.isRequired
@@ -79,4 +81,4 @@ const mapStateToProps = (state) => ({
     todoItems: state.todoItems
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getTodoItems })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, getUpcomingTodoItems, getCompletedTodoItems })(Dashboard);
