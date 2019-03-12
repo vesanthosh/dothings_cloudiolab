@@ -5,7 +5,7 @@ import { getUpcomingTodoItems, getCompletedTodoItems } from '../../actions/itemA
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
-import TodoItem from '../todo_item/TodoItem';
+import UpComingTodoItem from '../todo_item/UpComingTodoItem';
 import AddToDoItem from '../todo_item/AddToDoItem';
 
 class Dashboard extends Component {
@@ -36,7 +36,7 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoItem upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
+                        <UpComingTodoItem upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
                     </div>
                 );
             } else {
