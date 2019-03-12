@@ -1,4 +1,4 @@
-import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, DELETE_TODO, UPDATE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS } from './types';
+import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, DELETE_TODO, UPDATE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS } from './types';
 import axios from 'axios';
 
 // Get list of todo items
@@ -7,11 +7,22 @@ export const getTodoItems = () => dispatch => {
         .then(res =>
             dispatch({
                 type: GET_UPCOMING_TODOS,
-                payload: res.data
+                payload: res.data.filter(data => data.isCompleted === false)
             }))
         .catch(err =>
             dispatch({
                 type: GET_UPCOMING_TODOS,
+                payload: err.response.data
+            }));
+    axios.get('/api/todoItem/all')
+        .then(res =>
+            dispatch({
+                type: GET_COMPLETED_TODOS,
+                payload: res.data.filter(data => data.isCompleted === true)
+            }))
+        .catch(err =>
+            dispatch({
+                type: GET_COMPLETED_TODOS,
                 payload: err.response.data
             }));
 }
