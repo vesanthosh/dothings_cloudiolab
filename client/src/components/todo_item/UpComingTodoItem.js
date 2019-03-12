@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment'; // used to format the date from mongodb
 import { deleteTodoItem } from '../../actions/itemActions';
-import EditTodoItem from '../todo_item/EditTodoItem';
+import EditTodoItem from './EditTodoItem';
 
-class TodoItem extends Component {
+class UpComingTodoItem extends Component {
 
     onDeleteClick(id) {
         this.props.deleteTodoItem(id);
@@ -16,7 +16,12 @@ class TodoItem extends Component {
             <div key={upcomingTodos._id} className="list-group">
                 <a href="#/" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1">{upcomingTodos.name}</h5>
+                        <h5 className="mb-1">
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
+                                <label className="custom-control-label" htmlFor="defaultUnchecked">{upcomingTodos.name}</label>
+                            </div>
+                        </h5>
                         <small>
                             <div className="row">
                                 <EditTodoItem _id={upcomingTodos._id} name={upcomingTodos.name} description={upcomingTodos.description} />{' '}
@@ -37,24 +42,17 @@ class TodoItem extends Component {
         ));
 
         return (
-            < div >
-                <div className="mb-4">
-                    <h4>Upcoming Tasks</h4>
-                    <p className="mb-1">You have no upcoming tasks to do.</p>
-                    {upcomingTodos}
-                </div>
-                <div className="mb-4">
-                    <h4>Tasks Completed</h4>
-                    <p className="mb-1">You have no tasks completed till so far.</p>
-                    {upcomingTodos}
-                </div>
-            </div >
+            <div className="mb-4">
+                <h4>Upcoming Tasks</h4>
+                <p className="mb-1">You have no upcoming tasks to do.</p>
+                {upcomingTodos}
+            </div>
         );
     }
 }
 
-TodoItem.propTypes = {
+UpComingTodoItem.propTypes = {
     deleteTodoItem: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteTodoItem })(TodoItem);
+export default connect(null, { deleteTodoItem })(UpComingTodoItem);
