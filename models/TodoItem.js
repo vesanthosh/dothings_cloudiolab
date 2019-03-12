@@ -19,6 +19,10 @@ const TodoItemSchema = new Schema({
                 type: String,
                 max: 200
             },
+            isCompleted: {
+                type: Boolean,
+                default: false
+            },
             date: {
                 type: Date,
                 default: Date.now

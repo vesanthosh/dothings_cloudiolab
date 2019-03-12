@@ -19,6 +19,7 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
         const { currentUserProfile, loading } = this.props.profiles; // loading is to give spinner to the user that something is loading
         const { upcomingTodos } = this.props.todoItems; // here also we have loading state but we get duplicate state error
+        const { completedTodos } = this.props.todoItems;
 
         let dashboardContent;
 
@@ -34,7 +35,7 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoItem upcomingTodos={upcomingTodos} />
+                        <TodoItem upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
                     </div>
                 );
             } else {

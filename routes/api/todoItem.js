@@ -63,7 +63,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
             if (todoItem) {
                 const newTodoItem = {
                     name: req.body.name,
-                    description: req.body.description || 'No description'
+                    description: req.body.description || 'No description',
+                    isCompleted: req.body.isCompleted
                 };
                 // Save or create Profile with that handle
                 todoItem.todoItems.unshift(newTodoItem);
