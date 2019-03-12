@@ -41,9 +41,15 @@ export default function (state = initialState, action) {
                 ...state,
                 completedTodos: action.payload
             };
+        case DELETE_UPCOMING_TODO:
             return {
                 ...state,
-                upcomingTodos: action.payload
+                upcomingTodos: action.payload.filter(upcomingTodos => upcomingTodos.isCompleted === false)
+            };
+        case DELETE_COMPLETED_TODO:
+            return {
+                ...state,
+                completedTodos: action.payload.filter(completedTodos => completedTodos.isCompleted === true)
             };
         case TODOS_LOADING:
             return {
