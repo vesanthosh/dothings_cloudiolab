@@ -1,4 +1,4 @@
-import { GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, UPDATE_TODO, DELETE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS } from '../actions/types';
+import { GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, UPDATE_COMPLETED_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO } from '../actions/types';
 
 const initialState = {
     upcomingTodos: null,
@@ -31,12 +31,16 @@ export default function (state = initialState, action) {
                 ...state,
                 upcomingTodos: action.payload
             };
-        case UPDATE_TODO:
+        case UPDATE_UPCOMING_TODO:
             return {
                 ...state,
                 upcomingTodos: action.payload
             };
-        case DELETE_TODO:
+        case UPDATE_COMPLETED_TODO:
+            return {
+                ...state,
+                completedTodos: action.payload
+            };
             return {
                 ...state,
                 upcomingTodos: action.payload

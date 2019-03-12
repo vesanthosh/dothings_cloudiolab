@@ -1,13 +1,13 @@
-import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, DELETE_TODO, UPDATE_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS } from './types';
+import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO } from './types';
 import axios from 'axios';
 
 // Get list of upcoming todo items
 export const getUpcomingTodoItems = () => dispatch => {
-    axios.get('/api/todoItem/all')
+    axios.get('/api/todoItem/allupcoming')
         .then(res =>
             dispatch({
                 type: GET_UPCOMING_TODOS,
-                payload: res.data.filter(data => data.isCompleted === false)
+                payload: res.data
             }))
         .catch(err =>
             dispatch({
@@ -18,11 +18,11 @@ export const getUpcomingTodoItems = () => dispatch => {
 
 // Get list of completed todo items
 export const getCompletedTodoItems = () => dispatch => {
-    axios.get('/api/todoItem/all')
+    axios.get('/api/todoItem/allcompleted')
         .then(res =>
             dispatch({
                 type: GET_COMPLETED_TODOS,
-                payload: res.data.filter(data => data.isCompleted === true)
+                payload: res.data
             }))
         .catch(err =>
             dispatch({
@@ -60,10 +60,23 @@ export const addTodoItem = (itemData) => dispatch => {
 };
 
 // delete todo items
-export const deleteTodoItem = (id) => dispatch => {
+export const deleteUpcomingTodoItem = (id) => dispatch => {
     axios.delete(`/api/todoItem/${id}`)
         .then(res => dispatch({
-            type: DELETE_TODO,
+            type: DELETE_UPCOMING_TODO,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+};
+
+// delete todo items
+export const deleteCompletedTodoItem = (id) => dispatch => {
+    axios.delete(`/api/todoItem/${id}`)
+        .then(res => dispatch({
+            type: DELETE_COMPLETED_TODO,
             payload: res.data
         }))
         .catch(err => dispatch({
@@ -73,10 +86,10 @@ export const deleteTodoItem = (id) => dispatch => {
 };
 
 // Update todo item // TODO: improve the state
-export const editTodoItem = (id, item) => dispatch => {
+export const editUpcomingTodoItem = (id, item) => dispatch => {
     axios.put(`/api/todoItem/${id}`, item)
         .then(res => dispatch({
-            type: UPDATE_TODO,
+            type: UPDATE_UPCOMING_TODO,
             payload: res.data
         }))
         .catch(err => dispatch({
