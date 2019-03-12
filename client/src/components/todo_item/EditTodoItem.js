@@ -4,7 +4,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader } from 'reactstrap';
-import { editTodoItem } from '../../actions/itemActions';
+import { editUpcomingTodoItem } from '../../actions/itemActions';
 
 class EditTodoItem extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class EditTodoItem extends Component {
             _id: this.props._id,
             name: this.props.name,
             description: this.props.description,
+            isCompleted: this.props.isCompleted,
             errors: {}
         };
 
@@ -32,9 +33,10 @@ class EditTodoItem extends Component {
 
         const newItemData = {
             name: this.state.name,
-            description: this.state.description
+            description: this.state.description,
+            isCompleted: this.state.isCompleted
         };
-        this.props.editTodoItem(this.state._id, newItemData);
+        this.props.editUpcomingTodoItem(this.state._id, newItemData);
         // Close modal
         this.toggle();
     }
@@ -88,4 +90,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { editTodoItem })(EditTodoItem);
+export default connect(mapStateToProps, { editUpcomingTodoItem })(EditTodoItem);

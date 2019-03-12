@@ -7,6 +7,7 @@ import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
 import UpComingTodoItem from '../todo_item/UpComingTodoItem';
 import AddToDoItem from '../todo_item/AddToDoItem';
+import CompletedTodoItem from '../todo_item/CompletedTodoItem';
 
 class Dashboard extends Component {
 
