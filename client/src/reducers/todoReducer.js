@@ -1,4 +1,4 @@
-import { GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, UPDATE_COMPLETED_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO } from '../actions/types';
+import { GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, UPDATE_COMPLETED_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO, SET_UPCOMING_TODO_DONE, SET_COMPLETED_TODO_UNDONE } from '../actions/types';
 
 const initialState = {
     upcomingTodos: null,
@@ -29,17 +29,29 @@ export default function (state = initialState, action) {
         case ADD_TODO:
             return {
                 ...state,
-                upcomingTodos: action.payload
+                upcomingTodos: action.payload.filter(upcomingTodos => upcomingTodos.isCompleted === false)
             };
         case UPDATE_UPCOMING_TODO:
             return {
                 ...state,
-                upcomingTodos: action.payload
+                upcomingTodos: action.payload.filter(upcomingTodos => upcomingTodos.isCompleted === false)
             };
         case UPDATE_COMPLETED_TODO:
             return {
                 ...state,
-                completedTodos: action.payload
+                completedTodos: action.payload.filter(completedTodos => completedTodos.isCompleted === true)
+            };
+        case SET_UPCOMING_TODO_DONE:
+            return {
+                ...state,
+                upcomingTodos: action.payload.filter(upcomingTodos => upcomingTodos.isCompleted === false),
+                completedTodos: action.payload.filter(completedTodos => completedTodos.isCompleted === true)
+            };
+        case SET_COMPLETED_TODO_UNDONE:
+            return {
+                ...state,
+                upcomingTodos: action.payload.filter(upcomingTodos => upcomingTodos.isCompleted === false),
+                completedTodos: action.payload.filter(completedTodos => completedTodos.isCompleted === true)
             };
         case DELETE_UPCOMING_TODO:
             return {

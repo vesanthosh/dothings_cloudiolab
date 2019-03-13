@@ -1,4 +1,4 @@
-import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO } from './types';
+import { GET_ERRORS, GET_UPCOMING_TODOS, GET_SINGLE_UPCOMING_TODO, ADD_TODO, TODOS_LOADING, CLEAR_CURRENT_TODOS, GET_COMPLETED_TODOS, UPDATE_UPCOMING_TODO, DELETE_UPCOMING_TODO, DELETE_COMPLETED_TODO, SET_UPCOMING_TODO_DONE, SET_COMPLETED_TODO_UNDONE } from './types';
 import axios from 'axios';
 
 // Get list of upcoming todo items
@@ -90,6 +90,32 @@ export const editUpcomingTodoItem = (id, item) => dispatch => {
     axios.put(`/api/todoItem/${id}`, item)
         .then(res => dispatch({
             type: UPDATE_UPCOMING_TODO,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+};
+
+// Set todo task as completed.
+export const setTodoItemAsCompleted = (id, item) => dispatch => {
+    axios.put(`/api/todoItem/${id}`, item)
+        .then(res => dispatch({
+            type: SET_UPCOMING_TODO_DONE,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+};
+
+// Set todo task as not done.
+export const setTodoItemAsNotCompleted = (id, item) => dispatch => {
+    axios.put(`/api/todoItem/${id}`, item)
+        .then(res => dispatch({
+            type: SET_COMPLETED_TODO_UNDONE,
             payload: res.data
         }))
         .catch(err => dispatch({
