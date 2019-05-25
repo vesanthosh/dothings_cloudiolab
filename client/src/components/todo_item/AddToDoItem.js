@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import SelectListGroup from '../common/SelectListGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addTodoItem } from '../../actions/itemActions';
@@ -13,6 +14,8 @@ class AddToDoItem extends Component {
             modal: false,
             name: '',
             description: '',
+            category: 'Others',
+            priority: 'Low',
             errors: {}
         };
 
@@ -37,7 +40,9 @@ class AddToDoItem extends Component {
 
         const itemData = {
             name: this.state.name,
-            description: this.state.description
+            description: this.state.description,
+            category: this.state.category,
+            priority: this.state.priority
         };
         this.props.addTodoItem(itemData);
         // TODO: Before close we have to clear the state and prevent closing the modal with error message
@@ -50,6 +55,20 @@ class AddToDoItem extends Component {
 
     render() {
         const { errors } = this.state;
+
+        const categoryOptions = [
+            { label: 'Personal', value: 'Personal' },
+            { label: 'Work Related', value: 'Work Related' },
+            { label: 'Shopping', value: 'Shopping' },
+            { label: 'Others', value: 'Others' }
+        ];
+
+        const priorityOptions = [
+            { label: 'Critical', value: 'Critical' },
+            { label: 'Important', value: 'Important' },
+            { label: 'Normal', value: 'Normal' },
+            { label: 'Low', value: 'Low' }
+        ];
 
         return (
             <div className="add-todo-item">
@@ -75,6 +94,22 @@ class AddToDoItem extends Component {
                                 value={this.state.description}
                                 onChange={this.onChange}
                                 error={errors.description}
+                            />
+                            <SelectListGroup
+                                placeholder="Category"
+                                name="category"
+                                value={this.state.category}
+                                onChange={this.onChange}
+                                options={categoryOptions}
+                                error={errors.category}
+                            />
+                            <SelectListGroup
+                                placeholder="Priority"
+                                name="priority"
+                                value={this.state.priority}
+                                onChange={this.onChange}
+                                options={priorityOptions}
+                                error={errors.priority}
                             />
                             <input type="submit" value="Submit" className="btn btn-info float-right" />
                         </form>

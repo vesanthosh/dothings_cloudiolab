@@ -19,6 +19,16 @@ const TodoItemSchema = new Schema({
                 type: String,
                 max: 200
             },
+            category: {
+                type: String
+            },
+            priority: {
+                type: String
+            },
+            isCompleted: {
+                type: Boolean,
+                default: false
+            },
             date: {
                 type: Date,
                 default: Date.now

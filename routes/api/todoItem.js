@@ -25,6 +25,38 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) 
         .catch(err => res.status(500).json({ message: err.message || "Error occurred while retrieving todo items. Internal Server Error 500." }));
 });
 
+// @route   GET api/todoItem/allupcoming
+// @desc    Get current user's all upcoming todo items
+// @access  Private
+router.get('/allupcoming', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {};
+    TodoItem.findOne({ user: req.user.id })
+        .then(todoItem => {
+            if (!todoItem) {
+                errors.noprofile = 'There is no profile for this user. First create user profile to add your favourite todo item.';
+                return res.status(404).json(errors);
+            }
+            res.json(todoItem.todoItems.filter(todoItems => todoItems.isCompleted === false));
+        })
+        .catch(err => res.status(500).json({ message: err.message || "Error occurred while retrieving todo items. Internal Server Error 500." }));
+});
+
+// @route   GET api/todoItem/allcompleted
+// @desc    Get current user's all completed todo items
+// @access  Private
+router.get('/allcompleted', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {};
+    TodoItem.findOne({ user: req.user.id })
+        .then(todoItem => {
+            if (!todoItem) {
+                errors.noprofile = 'There is no profile for this user. First create user profile to add your favourite todo item.';
+                return res.status(404).json(errors);
+            }
+            res.json(todoItem.todoItems.filter(todoItems => todoItems.isCompleted === true));
+        })
+        .catch(err => res.status(500).json({ message: err.message || "Error occurred while retrieving todo items. Internal Server Error 500." }));
+});
+
 // @route   GET api/todoItem/:todoItem_id
 // @desc    Get single todo item by id
 // @access  Private
@@ -63,7 +95,10 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
             if (todoItem) {
                 const newTodoItem = {
                     name: req.body.name,
-                    description: req.body.description || 'No description'
+                    description: req.body.description || 'No description',
+                    category: req.body.category || 'Others',
+                    priority: req.body.priority || 'Low',
+                    isCompleted: req.body.isCompleted
                 };
                 // Save or create Profile with that handle
                 todoItem.todoItems.unshift(newTodoItem);
@@ -110,7 +145,10 @@ router.put('/:todoItem_id', passport.authenticate('jwt', { session: false }), (r
                 TodoItem.findOneAndUpdate({ user: req.user.id, 'todoItems._id': req.params.todoItem_id }, {
                     $set: {
                         'todoItems.$.name': req.body.name,
-                        'todoItems.$.description': req.body.description || 'No description'
+                        'todoItems.$.description': req.body.description || 'No description',
+                        'todoItems.$.category': req.body.category,
+                        'todoItems.$.priority': req.body.priority,
+                        'todoItems.$.isCompleted': req.body.isCompleted
                     }
                 }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem.todoItems));
             }

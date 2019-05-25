@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTodoItems } from '../../actions/itemActions';
+import { getUpcomingTodoItems, getCompletedTodoItems } from '../../actions/itemActions';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
-import TodoItem from '../todo_item/TodoItem';
+import UpComingTodoItem from '../todo_item/UpComingTodoItem';
 import AddToDoItem from '../todo_item/AddToDoItem';
+import CompletedTodoItem from '../todo_item/CompletedTodoItem';
+import TodoOverview from '../todo_item/TodoOverview';
 
 class Dashboard extends Component {
 
     componentDidMount() {
-        this.props.getTodoItems();
+        this.props.getUpcomingTodoItems();
+        this.props.getCompletedTodoItems();
         this.props.getCurrentProfile();
     }
 
@@ -19,6 +22,7 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
         const { currentUserProfile, loading } = this.props.profiles; // loading is to give spinner to the user that something is loading
         const { upcomingTodos } = this.props.todoItems; // here also we have loading state but we get duplicate state error
+        const { completedTodos } = this.props.todoItems;
 
         let dashboardContent;
 
@@ -34,7 +38,9 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoItem upcomingTodos={upcomingTodos} />
+                        <TodoOverview upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
+                        <UpComingTodoItem upcomingTodos={upcomingTodos} />
+                        <CompletedTodoItem completedTodos={completedTodos} />
                     </div>
                 );
             } else {
@@ -54,7 +60,6 @@ class Dashboard extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-12'>
-                            <h1 className='display-4'>Dashboard</h1>
                             {dashboardContent}
                         </div>
                     </div>
@@ -66,7 +71,8 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    getTodoItems: PropTypes.func.isRequired,
+    getUpcomingTodoItems: PropTypes.func.isRequired,
+    getCompletedTodoItems: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     todoItems: PropTypes.object.isRequired,
     profiles: PropTypes.object.isRequired
@@ -78,4 +84,4 @@ const mapStateToProps = (state) => ({
     todoItems: state.todoItems
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getTodoItems })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, getUpcomingTodoItems, getCompletedTodoItems })(Dashboard);
