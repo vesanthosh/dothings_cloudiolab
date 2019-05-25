@@ -10,13 +10,15 @@ class CompletedTodoItem extends Component {
         this.props.deleteCompletedTodoItem(id);
     }
 
-    onChange(id, nameValue, descriptionValue, isCompletedValue) {
+    onChange(completedTodoValues) {
         const newItemData = {
-            name: nameValue,
-            description: descriptionValue,
-            isCompleted: !isCompletedValue
+            name: completedTodoValues.name,
+            description: completedTodoValues.description,
+            category: completedTodoValues.category,
+            priority: completedTodoValues.priority,
+            isCompleted: !completedTodoValues.isCompleted
         };
-        this.props.setTodoItemAsNotCompleted(id, newItemData);
+        this.props.setTodoItemAsNotCompleted(completedTodoValues._id, newItemData);
     }
 
     render() {
@@ -28,7 +30,7 @@ class CompletedTodoItem extends Component {
                         <div className="d-flex w-100 justify-content-between">
                             <h5 className="mb-1">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id={completedTodos._id} checked={completedTodos.isCompleted} onChange={this.onChange.bind(this, completedTodos._id, completedTodos.name, completedTodos.description, completedTodos.isCompleted)} />
+                                    <input type="checkbox" className="custom-control-input" id={completedTodos._id} checked={completedTodos.isCompleted} onChange={this.onChange.bind(this, completedTodos)} />
                                     <label className="custom-control-label" htmlFor={completedTodos._id}><del>{completedTodos.name}</del></label>
                                 </div>
                             </h5>
@@ -56,7 +58,7 @@ class CompletedTodoItem extends Component {
         }
 
         return (
-            <div className="mb-4">
+            <div className="mb-3">
                 <h4>Tasks Completed</h4>
                 {completedTodos}
             </div>

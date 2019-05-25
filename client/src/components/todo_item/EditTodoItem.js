@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import SelectListGroup from '../common/SelectListGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal, ModalHeader } from 'reactstrap';
@@ -11,10 +12,12 @@ class EditTodoItem extends Component {
         super(props);
         this.state = {
             modal: false,
-            _id: this.props._id,
-            name: this.props.name,
-            description: this.props.description,
-            isCompleted: this.props.isCompleted,
+            _id: this.props.upcomingTodo._id,
+            name: this.props.upcomingTodo.name,
+            description: this.props.upcomingTodo.description,
+            category: this.props.upcomingTodo.category,
+            priority: this.props.upcomingTodo.priority,
+            isCompleted: this.props.upcomingTodo.isCompleted,
             errors: {}
         };
 
@@ -34,6 +37,8 @@ class EditTodoItem extends Component {
         const newItemData = {
             name: this.state.name,
             description: this.state.description,
+            category: this.state.category,
+            priority: this.state.priority,
             isCompleted: this.state.isCompleted
         };
         this.props.editUpcomingTodoItem(this.state._id, newItemData);
@@ -47,6 +52,20 @@ class EditTodoItem extends Component {
 
     render() {
         const { errors } = this.state;
+
+        const categoryOptions = [
+            { label: 'Personal', value: 'Personal' },
+            { label: 'Work Related', value: 'Work Related' },
+            { label: 'Shopping', value: 'Shopping' },
+            { label: 'Others', value: 'Others' }
+        ];
+
+        const priorityOptions = [
+            { label: 'Critical', value: 'Critical' },
+            { label: 'Important', value: 'Important' },
+            { label: 'Normal', value: 'Normal' },
+            { label: 'Low', value: 'Low' }
+        ];
 
         return (
             <div className="add-todo-item">
@@ -72,6 +91,23 @@ class EditTodoItem extends Component {
                                 value={this.state.description}
                                 onChange={this.onChange}
                                 error={errors.description}
+                            />
+
+                            <SelectListGroup
+                                placeholder="Category"
+                                name="category"
+                                value={this.state.category}
+                                onChange={this.onChange}
+                                options={categoryOptions}
+                                error={errors.category}
+                            />
+                            <SelectListGroup
+                                placeholder="Priority"
+                                name="priority"
+                                value={this.state.priority}
+                                onChange={this.onChange}
+                                options={priorityOptions}
+                                error={errors.priority}
                             />
                             <input type="submit" value="Submit" className="btn btn-info float-right" />
                         </form>

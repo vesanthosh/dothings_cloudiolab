@@ -11,13 +11,15 @@ class UpComingTodoItem extends Component {
         this.props.deleteUpcomingTodoItem(id);
     }
 
-    onChange(id, nameValue, descriptionValue, isCompletedValue) {
+    onChange(upcomingTodoValues) {
         const newItemData = {
-            name: nameValue,
-            description: descriptionValue,
-            isCompleted: !isCompletedValue
+            name: upcomingTodoValues.name,
+            description: upcomingTodoValues.description,
+            category: upcomingTodoValues.category,
+            priority: upcomingTodoValues.priority,
+            isCompleted: !upcomingTodoValues.isCompleted
         };
-        this.props.setTodoItemAsCompleted(id, newItemData);
+        this.props.setTodoItemAsCompleted(upcomingTodoValues._id, newItemData);
     }
 
     render() {
@@ -29,13 +31,13 @@ class UpComingTodoItem extends Component {
                         <div className="d-flex w-100 justify-content-between">
                             <h5 className="mb-1">
                                 <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input" id={upcomingTodos._id} checked={upcomingTodos.isCompleted} onChange={this.onChange.bind(this, upcomingTodos._id, upcomingTodos.name, upcomingTodos.description, upcomingTodos.isCompleted)} />
+                                    <input type="checkbox" className="custom-control-input" id={upcomingTodos._id} checked={upcomingTodos.isCompleted} onChange={this.onChange.bind(this, upcomingTodos)} />
                                     <label className="custom-control-label" htmlFor={upcomingTodos._id}>{upcomingTodos.name}</label>
                                 </div>
                             </h5>
                             <small>
                                 <div className="row">
-                                    <EditTodoItem _id={upcomingTodos._id} name={upcomingTodos.name} description={upcomingTodos.description} isCompleted={upcomingTodos.isCompleted} />{' '}
+                                    <EditTodoItem upcomingTodo={upcomingTodos} />{' '}
                                     <div className="col-md-6">
                                         <button className="btn btn-danger btn-sm custom-button-width" onClick={this.onDeleteClick.bind(this, upcomingTodos._id)}>
                                             <i className="fa fa-trash" />
@@ -49,7 +51,7 @@ class UpComingTodoItem extends Component {
                             <Moment fromNow>{upcomingTodos.date}</Moment>
                         </small>
                     </a>
-                </div >
+                </div>
             ));
         } else {
             upcomingTodos = (
@@ -58,7 +60,7 @@ class UpComingTodoItem extends Component {
         }
 
         return (
-            <div className="mb-4">
+            <div className="mb-3">
                 <h4>Upcoming Tasks</h4>
                 {upcomingTodos}
             </div>

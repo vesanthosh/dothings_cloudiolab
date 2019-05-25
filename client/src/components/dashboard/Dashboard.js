@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import UpComingTodoItem from '../todo_item/UpComingTodoItem';
 import AddToDoItem from '../todo_item/AddToDoItem';
 import CompletedTodoItem from '../todo_item/CompletedTodoItem';
+import TodoOverview from '../todo_item/TodoOverview';
 
 class Dashboard extends Component {
 
@@ -37,6 +38,7 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
+                        <TodoOverview upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
                         <UpComingTodoItem upcomingTodos={upcomingTodos} />
                         <CompletedTodoItem completedTodos={completedTodos} />
                     </div>
@@ -58,7 +60,6 @@ class Dashboard extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-12'>
-                            <h1 className='display-4'>Dashboard</h1>
                             {dashboardContent}
                         </div>
                     </div>

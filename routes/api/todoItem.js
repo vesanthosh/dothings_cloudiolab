@@ -96,6 +96,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
                 const newTodoItem = {
                     name: req.body.name,
                     description: req.body.description || 'No description',
+                    category: req.body.category || 'Others',
+                    priority: req.body.priority || 'Low',
                     isCompleted: req.body.isCompleted
                 };
                 // Save or create Profile with that handle
@@ -144,6 +146,8 @@ router.put('/:todoItem_id', passport.authenticate('jwt', { session: false }), (r
                     $set: {
                         'todoItems.$.name': req.body.name,
                         'todoItems.$.description': req.body.description || 'No description',
+                        'todoItems.$.category': req.body.category,
+                        'todoItems.$.priority': req.body.priority,
                         'todoItems.$.isCompleted': req.body.isCompleted
                     }
                 }, { new: true }).then(updatedtTodoItem => res.json(updatedtTodoItem.todoItems));
