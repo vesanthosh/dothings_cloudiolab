@@ -38,7 +38,7 @@ class Dashboard extends Component {
                             <AddToDoItem />
                         </div>
                         {/* passing item.todoItems array as a parameter/property */}
-                        <TodoOverview upcomingTodos={upcomingTodos} completedTodos={completedTodos} />
+                        {/* <TodoOverview upcomingTodos={upcomingTodos} completedTodos={completedTodos} /> */}
                         <UpComingTodoItem upcomingTodos={upcomingTodos} />
                         <CompletedTodoItem completedTodos={completedTodos} />
                     </div>
