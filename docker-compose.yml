@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  client:
+    image: docker.cloudiolab.com/cloudiolab/client:latest
+    ports:
+      - "3003:3003"
+    networks:
+      - test_network
+
+  api:
+    image: docker.cloudiolab.com/cloudiolab/api:latest
+    ports:
+      - "9001:9001"
+    environment:
+      - DOTHINGS_MONGO_URI=mongodb://username:password@192.168.99.108:27017/db
+      - DOTHINGS_API_SECRET_KEY=topsecretkey
+    networks:
+      - test_network
+
+networks:
+  test_network:
