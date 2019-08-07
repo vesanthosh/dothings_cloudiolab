@@ -1,21 +1,59 @@
 version: '3.7'
+
 services:
-  client:
-    image: docker.cloudiolab.com/cloudiolab/client:latest
+  app:
+    image: docker.cloudiolab.com/cloudiolab/dothings:latest
+    restart: on-failure
     ports:
       - "3003:3003"
+    environment:
+      PORT: 3003
+    secrets:
+      - dothings_db_user
+      - dothings_db_pass
+      - api_secret_key
+    volumes:
+      - ./secrets/app/:/docker-entrypoint/
+    command: ["/bin/sh", "/docker-entrypoint/entrypoint.sh"]
     networks:
       - test_network
+    links:
+      - mongodb
 
-  api:
-    image: docker.cloudiolab.com/cloudiolab/api:latest
-    ports:
-      - "9001:9001"
+  mongodb:
+    image: mongo:4.0
+    restart: on-failure
     environment:
-      - DOTHINGS_MONGO_URI=mongodb://username:password@192.168.99.108:27017/db
-      - DOTHINGS_API_SECRET_KEY=topsecretkey
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_root_user
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_root_pass
+      MONGO_INITDB_DATABASE: dothingsdb
+    secrets:
+      - mongo_root_user
+      - mongo_root_pass
+      - dothings_db_user
+      - dothings_db_pass
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+      - ./secrets/mongo/:/docker-entrypoint-initdb.d/
     networks:
       - test_network
 
 networks:
   test_network:
+
+volumes:
+  mongo_db:
+
+secrets:
+  mongo_root_user:
+    file: ./secrets/mongo/mongo_root_user
+  mongo_root_pass:
+    file: ./secrets/mongo/mongo_root_pass
+  dothings_db_user:
+    file: ./secrets/app/dothings_db_user
+  dothings_db_pass:
+    file: ./secrets/app/dothings_db_pass
+  api_secret_key:
+    file: ./secrets/app/api_secret_key
