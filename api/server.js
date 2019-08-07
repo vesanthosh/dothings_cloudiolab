@@ -19,10 +19,9 @@ app.use(bodyParser.json());
 const db_url = require("./config/keys").mongoURI; // Have to implement collections logic seperatly.
 
 // Connect to Mongo
-mongoose.connect(db_url, { useNewUrlParser: true }, function (err, db) {
-  if (!err) console.log("MongoDB Connected...");
-  else console.log(err);
-});
+mongoose.connect(db_url, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch(err => { console.log(err); process.exit(1); });
 
 // Passport middleware
 app.use(passport.initialize());
@@ -38,13 +37,13 @@ app.use("/api/todoItem", todoItem);
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static('frontend/build'));
 
   // redirecting routes to the default page.
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
 }
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3003;
 app.listen(port, () => console.log("Server started on port " + port));
