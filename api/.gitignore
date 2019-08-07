@@ -4,13 +4,6 @@
 # dependencies
 /node_modules
 
-# secrets
-api_secret_key
-app_db_user
-app_db_pass
-mongo_root_user
-mongo_root_pass
-
 # testing
 /coverage
 
