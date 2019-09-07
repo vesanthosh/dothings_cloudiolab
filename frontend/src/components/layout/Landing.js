@@ -25,7 +25,6 @@ class Landing extends Component {
                     </div>
                 </div>
             </section>
-
         );
     }
 }

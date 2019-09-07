@@ -58,7 +58,7 @@ class Navbar extends Component {
                         Dothings
                     </Link>
                 </h1>
-                        {isAuthenticated ? authLinks : guestLinks}
+                {isAuthenticated ? authLinks : guestLinks}
             </nav>
         );
     }
