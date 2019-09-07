@@ -13,21 +13,18 @@ class Landing extends Component {
 
     render() {
         return (
-            <div className="landing">
-                <div className="dark-overlay landing-inner text-light">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 text-center">
-                                <h1 className="display-3 mb-4">Do-Things</h1>
-                                <p className="lead"> Create a Do-Things profile/portfolio, share your tasks and goals and let others knows your social activities. Get help or help others through social task sharing platform.</p>
-                                <hr />
-                                <Link to="/register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
-                                <Link to="/login" className="btn btn-lg btn-light">Login</Link>
-                            </div>
+            <section className="landing">
+                <div className="dark-overlay">
+                    <div className="landing-inner">
+                        <h1 className="x-large">Welcome to Dothings</h1>
+                        <p className="lead"> Create a Dothings profile/portfolio, share your tasks and goals and let others knows your social activities. Get help or help others through social task sharing platform.</p>
+                        <div className="buttons">
+                            <Link to="/register" className="btn btn-primary">Sign Up</Link>
+                            <Link to="/login" className="btn btn-light">Login</Link>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
         );
     }

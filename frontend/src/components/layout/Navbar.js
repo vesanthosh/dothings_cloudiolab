@@ -22,9 +22,9 @@ class Navbar extends Component {
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
-            <ul className="navbar-nav ml-auto">
-                <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link> </li>
-                <li className="nav-item dropdown">
+            <ul>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li>
                     <a href="\" className="nav-link dropdown-toggle" data-toggle="dropdown">{user.name}{' '}
                         <img className="rounded-circle"
                             src={user.avatar}
@@ -43,33 +43,22 @@ class Navbar extends Component {
         );
 
         const guestLinks = (
-            <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/register">Sign Up</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
-                </li>
+            <ul>
+                <li><Link to="/public-profiles">People</Link></li>
+                <li><Link to="/register">Register</Link></li>
+                <li><Link to="/login">Login</Link></li>
             </ul>
         );
 
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-                <div className="container">
-                    <Link className="navbar-brand" to="/">Do-Things</Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="mobile-nav">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/public-profiles">{' '}People</Link> {/*{' '} - this is for space */}
-                            </li>
-                        </ul>
+            <nav className="navbar bg-dark">
+                <h1>
+                    <Link to="/">
+                        <i class="fas fa-check-double"></i>{' '}
+                        Dothings
+                    </Link>
+                </h1>
                         {isAuthenticated ? authLinks : guestLinks}
-                    </div>
-                </div>
             </nav>
         );
     }
