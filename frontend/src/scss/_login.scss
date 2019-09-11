@@ -1,0 +1,22 @@
+// Login
+.login-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $white-color;
+    border-radius: 20px 100px;
+}
+.login-form{
+    display: grid;
+    justify-content: center;
+    form{
+        padding-top: 0.5rem;
+        .form-submit-area{
+            display: grid;
+            grid-gap: 14rem;
+            grid-template-columns: repeat(2,1fr);
+            justify-content: space-between;
+        }
+    }
+}

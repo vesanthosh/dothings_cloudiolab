@@ -1,0 +1,23 @@
+// Landing
+.landing {
+    position: relative;
+    background: url('./img/showcase.jpg')no-repeat center/cover;
+    height: 100vh;
+
+    &-inner {
+        color: $white-color;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .buttons{
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
