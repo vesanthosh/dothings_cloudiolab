@@ -87,6 +87,11 @@ img {
         justify-content: center;
         text-align: center;
     }
+    .buttons{
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 // Forms
@@ -113,12 +118,12 @@ img {
         border-radius: 2px;
     }
     
-    input[type='checkbox']+label{
-        display: block;
-        
-    }
     input[type='checkbox']{
         display: none;
+    }
+    input[type='checkbox']+label{
+        display: block;
+        cursor: pointer;
     }
     input[type="checkbox"]+label::before {
         content: "\2718";
@@ -134,7 +139,6 @@ img {
         transition: 0.2s;
     }
     input[type="checkbox"]:checked+label::before {
-        background-color: $light-color;
         color: $primary-color;
     }
 }
@@ -147,20 +151,26 @@ img {
 }
 
 // Register
-.register{
+.register-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $white-color;
+    border-radius: 20px 100px;
+}
+.register-form{
     display: grid;
-    grid-gap: 2rem;
-    grid-template-columns: repeat(2,1fr);
-    background: $light-color;
-    padding: 1rem;
-    border-radius: 15px 15px;
-    &-info{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: $white-color;
-        border-radius: 20px 100px;
+    justify-content: center;
+    form{
+        padding-top: 0.5rem;
+        .form-name-area{
+            display: grid;
+            grid-gap: 1.2rem;
+            margin: 1.2rem 0;
+            grid-template-columns: repeat(2,1fr);
+            justify-content: space-between;
+        }
     }
 }
 

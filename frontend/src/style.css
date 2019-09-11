@@ -83,7 +83,7 @@
   margin: auto;
   overflow: hidden;
   padding: 1rem 2rem;
-  margin-top: 2rem;
+  margin-top: 5rem;
   margin-bottom: 3rem;
 }
 
@@ -158,7 +158,6 @@
   font-size: 1rem;
   border: none;
   outline: none;
-  margin-right: 0.5rem;
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
   border-bottom: solid 2px #D4857B;
@@ -320,6 +319,14 @@ img {
   text-align: center;
 }
 
+.landing .buttons {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 1rem;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+}
+
 .form-group {
   margin: 1.2rem 0;
 }
@@ -344,12 +351,13 @@ img {
   border-radius: 2px;
 }
 
-.form input[type='checkbox'] + label {
-  display: block;
-}
-
 .form input[type='checkbox'] {
   display: none;
+}
+
+.form input[type='checkbox'] + label {
+  display: block;
+  cursor: pointer;
 }
 
 .form input[type="checkbox"] + label::before {
@@ -368,7 +376,6 @@ img {
 }
 
 .form input[type="checkbox"]:checked + label::before {
-  background-color: #F3E6D8;
   color: #64a2a2;
 }
 
@@ -376,17 +383,6 @@ img {
   font-size: 0.9rem;
   color: #D4857B;
   padding-top: 0.2rem;
-}
-
-.register {
-  display: -ms-grid;
-  display: grid;
-  grid-gap: 2rem;
-  -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
-  background: #F3E6D8;
-  padding: 1rem;
-  border-radius: 15px 15px;
 }
 
 .register-info {
@@ -405,6 +401,30 @@ img {
           justify-content: center;
   background: #f3f0ec;
   border-radius: 20px 100px;
+}
+
+.register-form {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.register-form form {
+  padding-top: 0.5rem;
+}
+
+.register-form form .form-name-area {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 1.2rem;
+  margin: 1.2rem 0;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .login-info {
