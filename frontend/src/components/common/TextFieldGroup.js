@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const TextFieldGroup = ({
     name,
+    className,
     placeholder,
     value,
     error,
@@ -13,11 +14,8 @@ const TextFieldGroup = ({
     disabled
 }) => {
     return (
-        <div className="form-group">
+        <div className={className}>
             <input type={type}
-                className={classnames('form-control form-control-lg', {
-                    'is-invalid': error // if the errors.name is exist then it will be called.
-                })}
                 placeholder={placeholder}
                 name={name}
                 value={value}
@@ -32,6 +30,7 @@ const TextFieldGroup = ({
 
 TextFieldGroup.propTypes = {
     name: PropTypes.string.isRequired,
+    className: PropTypes.string,
     placeholder: PropTypes.string,
     value: PropTypes.string.isRequired,
     info: PropTypes.string,
