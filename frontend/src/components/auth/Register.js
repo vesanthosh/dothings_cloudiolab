@@ -9,7 +9,8 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
-            name: '',
+            firstname: '',
+            lastname: '',
             email: '',
             password: '',
             password2: '',
@@ -39,7 +40,8 @@ class Register extends Component {
     onSubmit(e) {
         e.preventDefault();
         const newUser = {
-            name: this.state.name,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2
@@ -53,30 +55,40 @@ class Register extends Component {
         return (
             <section className="container">
                 <h1 className="x-large text-primary text-center">
-                    Register Account
+                    Create a new account
                 </h1>
-                <div className="register">
-                    <div className="register-info">
-                        <p className="lead">
-                            <i className="fas fa-user"></i>{' '}
-                            Create an account
-                        </p>
-                        <p>Get started with your free account</p>
-                        <p className="my-1">
-                            Already have an account? <Link to="/login">Sign In</Link>
-                        </p>
-                    </div>
+                <div className="register-info">
+                    <p className="lead">
+                        Get started with your free account and only takes a few seconds.
+                    </p>
+                    <p>
+                        Let's do some things...!
+                    </p>
+                </div>
+
+                <div className="register-form">
                     <form className="form" noValidate onSubmit={this.onSubmit}>
+                        <div className="form-name-area">
+                            <TextFieldGroup
+                                placeholder="First Name"
+                                name="firstname"
+                                type="text"
+                                value={this.state.firstname}
+                                onChange={this.onChange}
+                                error={errors.name}
+                            />
+                            <TextFieldGroup
+                                placeholder="Last Name"
+                                name="lastname"
+                                type="text"
+                                value={this.state.lastname}
+                                onChange={this.onChange}
+                                error={errors.name}
+                            />
+                        </div>
                         <TextFieldGroup
-                            placeholder="Name"
-                            name="name"
-                            type="text"
-                            value={this.state.name}
-                            onChange={this.onChange}
-                            error={errors.name}
-                        />
-                        <TextFieldGroup
-                            placeholder="E-mail"
+                            className="form-group"
+                            placeholder="E-mail Address"
                             name="email"
                             type="email"
                             value={this.state.email}
@@ -85,14 +97,18 @@ class Register extends Component {
                             info="This site uses Gravatar so if you want a profile image, use a Gravatar email."
                         />
                         <TextFieldGroup
+                            className="form-group"
                             placeholder="Password"
                             name="password"
                             type="password"
                             value={this.state.password}
                             onChange={this.onChange}
                             error={errors.password}
+                            info="
+                            Use 8 or more characters with a mix of letters, numbers & symbols"
                         />
                         <TextFieldGroup
+                            className="form-group"
                             placeholder="Confirm Password"
                             name="password2"
                             type="password"
@@ -100,8 +116,12 @@ class Register extends Component {
                             onChange={this.onChange}
                             error={errors.password2}
                         />
-                        <input type="submit" className="btn btn-primary" />
+                        <input type="submit" value="Register" className="btn btn-primary" />
                     </form>
+                    <p className="my-1">
+                        Already have an account?
+                        <Link to="/login"> Sign In</Link>
+                    </p>
                 </div>
             </section>
         );

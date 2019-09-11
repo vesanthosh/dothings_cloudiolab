@@ -62,6 +62,7 @@ class Login extends Component {
                 <div className="login-form">
                     <form className="form" onSubmit={this.onSubmit}>
                         <TextFieldGroup
+                            className="form-group"
                             placeholder="E-mail Address"
                             name="email"
                             type="email"
@@ -70,6 +71,7 @@ class Login extends Component {
                             error={errors.email}
                         />
                         <TextFieldGroup
+                            className="form-group"
                             placeholder="Password"
                             name="password"
                             type="password"
@@ -78,7 +80,7 @@ class Login extends Component {
                             error={errors.password}
                         />
                         <div className="form-group">
-                            <input type="checkbox" id="remember"></input>
+                            <input type="checkbox" id="remember" />
                             <label for="remember">Keep me logged in</label>
                         </div>
                         <div className="form-submit-area">
